@@ -1,25 +1,21 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Separator } from "@radix-ui/react-dropdown-menu";
+"use client";
+
+import { z } from "zod";
+import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Separator } from "@radix-ui/react-dropdown-menu";
+import { registerScheme } from "../schemas";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import { registerScheme } from "../schemas";
+import { useForm } from "react-hook-form";
 import { useRegister } from "../api/use-register";
-
-// const formScheme = z.object({
-//     name: z.string().trim().min(1, "Required"),
-//     email: z.string().email(),
-//     password: z.string().min(8, "Minimum of 8 characters required"),
-// });
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 
 export const SignUpCard = () => {
-    const { mutate } = useRegister();
+    const { mutate, isPending } = useRegister();
 
     const form = useForm<z.infer<typeof registerScheme>>({
         resolver: zodResolver(registerScheme),
@@ -105,8 +101,8 @@ export const SignUpCard = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button disabled={false} size="lg" className="w-full">
-                            Login
+                        <Button disabled={isPending} size="lg" className="w-full">
+                            Register
                         </Button>
                     </form>
                 </Form>
@@ -116,7 +112,7 @@ export const SignUpCard = () => {
             </div>
             <CardContent className="p-7 flex flex-col gap-y-4">
                 <Button
-                    disabled={false}
+                    disabled={isPending}
                     variant="secondary"
                     size="lg"
                     className="w-full"
@@ -125,7 +121,7 @@ export const SignUpCard = () => {
                     Login with Google
                 </Button>
                 <Button
-                    disabled={false}
+                    disabled={isPending}
                     variant="secondary"
                     size="lg"
                     className="w-full"
