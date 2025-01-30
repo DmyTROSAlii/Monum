@@ -3,13 +3,13 @@ import { getCurrent } from "@/features/auth/actions";
 import { UserButton } from "@/features/auth/components/user-button";
 
 export default async function Home() {
-    const user = await getCurrent();
+  const user = await getCurrent();
 
-    if (!user) redirect("/sign-in");
+  if (!user) redirect("/sign-in");
 
-    return (
+  return (
     <div>
-      <UserButton />
-    </div>  
+      This is a home page
+    </div>
   );
 };
