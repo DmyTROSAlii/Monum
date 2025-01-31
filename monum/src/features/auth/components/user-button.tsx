@@ -1,6 +1,5 @@
 "use client";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -11,6 +10,7 @@ import { Loader, LogOut } from "lucide-react";
 import { useLogout } from "../api/use-logout";
 import { useCurrent } from "../api/use-current";
 import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export const UserButton = () => {
     const { mutate: logout } = useLogout();
