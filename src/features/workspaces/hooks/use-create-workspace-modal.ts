@@ -1,10 +1,36 @@
-// import { parseAsBoolean, useQueryState } from 'nuqs';
+import { useState } from "react";
+
+export const useCreateWorkspaceModal = () => {
+  const [ isOpen, setIsOpen ] = useState(false);
+
+ const open = () => setIsOpen(true);
+ const close = () => setIsOpen(false);
+
+ return {
+   isOpen,
+   open,
+   close,
+   setIsOpen,
+ };
+};
+
+
+
+
+// ======================================================
+// TODO: fixed error about nuqs modul and them functions
+
+// import { parseAsBoolean } from 'nuqs/server';
+// import { useQueryState } from 'nuqs';
 
 // export const useCreateWorkspaceModal = () => {
-//   const [isOpen, setIsOpen] = useQueryState(
-//     "create-workspace",
-//     parseAsBoolean.withDefault(false).withOptions({ clearOnDefault: true }),
-//   );
+//   // const [isOpen, setIsOpen] = useQueryState(
+//   //   "create-workspace",
+//   //   parseAsBoolean
+//   //     // .withDefault(false)
+//   //     // .withOptions({ clearOnDefault: true }),
+//   // );
+//   const [ isOpen, setIsOpen ] = useQueryState('create-workspace', parseAsBoolean.withDefault(false))
 
 //   const open = () => setIsOpen(true);
 //   const close = () => setIsOpen(false);
@@ -16,10 +42,3 @@
 //     setIsOpen,
 //   };
 // };
-
-import { parseAsBoolean, useQueryState } from 'nuqs';
-
-export const useCreateWorkspaceModal = () => {
-  const [isOpen, setIsOpen] = useQueryState('bool', parseAsBoolean.withDefault(true));
-  return {isOpen, setIsOpen};
-};
