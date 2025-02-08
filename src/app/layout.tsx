@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { QueryProvider } from "@/components/query-provider";
 
 const inter = Inter({
@@ -24,10 +25,12 @@ export default function RootLayout({
       <body
         className={cn(inter.className, "antialised min-h-screen")}
       >
-        <QueryProvider>
-          <Toaster />
-          {children}
-        </QueryProvider>
+        <NuqsAdapter>
+          <QueryProvider>
+            <Toaster />
+            {children}
+          </QueryProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );
