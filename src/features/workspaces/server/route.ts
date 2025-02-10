@@ -5,7 +5,7 @@ import { generateInviteCode } from "@/lib/utils";
 import { getMember } from "@/features/members/utils";
 import { MemberRole } from "@/features/members/types";
 import { sessionMiddleware } from "@/lib/session-middleware";
-import { createWorkspaceSchema, updateWorkspaceScheme } from "../shemas";
+import { createWorkspaceSchema, updateWorkspaceSchema } from "../shemas";
 import { DATABASES_ID, IMAGES_BUCKET_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
 
 const app = new Hono()
@@ -93,7 +93,7 @@ const app = new Hono()
   .patch(
     "/:workspaceId",
     sessionMiddleware,
-    zValidator("form", updateWorkspaceScheme),
+    zValidator("form", updateWorkspaceSchema),
     async (c) => {
       const databases = c.get("databases");
       const storage = c.get("storage");
@@ -142,6 +142,34 @@ const app = new Hono()
       );
 
       return c.json({ data: workspace });
+    }
+  )
+  .delete(
+    "/:workspaceId",
+    sessionMiddleware,
+    async (c) => {
+      const databases = c.get("databases");
+      const user = c.get("user");
+
+      const { workspaceId } = c.req.param();
+
+      const member = await getMember({
+        databases,
+        workspaceId,
+        userId: user.$id,
+      });
+
+      if (!member || member.role !== MemberRole.ADMIN) {
+        return c.json({ error: "Unauthorized" }, 401);
+      }
+
+      await databases.deleteDocument(
+        DATABASES_ID,
+        WORKSPACES_ID,
+        workspaceId,
+      );
+
+      return c.json({ data: { $id: workspaceId } });
     }
   );
 
