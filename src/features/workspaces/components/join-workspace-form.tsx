@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation.js";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import { useInviteCode } from "@/features/workspaces/hooks/use-invite-code.js";
-import { useWorkspaceId } from "../hooks/use-workspace-id.js";
+import { useInviteCode } from "../hooks/use-invite-code";
+import { useWorkspaceId } from "../hooks/use-workspace-id";
 import { useJoinWorkspace } from "../api/use-join-workspace.ts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -46,7 +46,7 @@ export const JoinWorkspaceForm = ({
           </CardDescription>
         </CardHeader>
         <div className="px-7">
-          <div className="px-2 mx-8 h-0.5 bg-gray-200">
+          <div className="my-8 h-0.5 bg-gray-200">
             <Separator />
           </div>
           <CardContent className="p-7">
