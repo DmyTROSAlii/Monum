@@ -1,6 +1,6 @@
 import { useMedia } from "react-use";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 interface ResponsiveModalProps {
   children: React.ReactNode;
@@ -18,6 +18,7 @@ export const ResponsiveModal = ({
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogTitle></DialogTitle>
         <DialogContent className="w-full sm:max-w-lg p-0 border-none overflow-y-auto hide-scrollbar max-h-[85vh]">
           {children}
         </DialogContent>
