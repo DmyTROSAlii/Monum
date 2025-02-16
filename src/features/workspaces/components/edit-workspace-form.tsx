@@ -272,11 +272,11 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
                 </Button>
               </div>
             </div>
-            <div className="px-2 mx-8 h-0.5 bg-gray-200">
+            <div className="my-8 h-0.5 bg-gray-200">
               <Separator />
             </div>
             <Button
-              className="mt-6 w-fit ml-auto"
+              className="w-fit ml-auto"
               size="sm"
               variant="destructive"
               type="button"
@@ -296,7 +296,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
             <p className="text-sm text-muted-foreground">
               Deleting a workspace is irreversible and will remove all associated data.
             </p>
-            <div className="px-2 mx-8 h-0.5 bg-gray-200">
+            <div className="my-8 h-0.5 bg-gray-200">
               <Separator />
             </div>
             <Button

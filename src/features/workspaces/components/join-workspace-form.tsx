@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation.js";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import { useInviteCode } from "../hooks/use-invite-code.js";
+import { useInviteCode } from "@/features/workspaces/hooks/use-invite-code.js";
 import { useWorkspaceId } from "../hooks/use-workspace-id.js";
 import { useJoinWorkspace } from "../api/use-join-workspace.ts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
