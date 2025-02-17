@@ -7,7 +7,7 @@ import { generateInviteCode } from "@/lib/utils";
 import { getMember } from "@/features/members/utils";
 import { MemberRole } from "@/features/members/types";
 import { sessionMiddleware } from "@/lib/session-middleware";
-import { createWorkspaceSchema, updateWorkspaceSchema } from "../shemas";
+import { createWorkspaceSchema, updateWorkspaceSchema } from "../schemas";
 import { DATABASES_ID, IMAGES_BUCKET_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
 
 const app = new Hono()

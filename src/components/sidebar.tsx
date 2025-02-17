@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Projects } from "./projects";
 import { Navigation } from "./navigation";
 import { WorkspaceSwitcher } from "./workspace-switcher";
 import { Separator } from "@radix-ui/react-dropdown-menu";
@@ -18,6 +19,10 @@ export const Sidebar = () => {
         <Separator />
       </div>
       <Navigation />
+      <div className="px-7 h-0.5 m-3 bg-gray-200">
+        <Separator />
+      </div>
+      <Projects />
     </aside>
   );
 };

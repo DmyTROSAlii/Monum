@@ -8,7 +8,7 @@ import { MemberRole } from "@/features/members/types";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { useWorkspaceId } from "../hooks/use-workspace-id";
 import { ArrowLeftIcon, MoreVerticalIcon } from "lucide-react";
-import { useGetMembers } from "@/features/members/api/use-get-workspaces";
+import { useGetMembers } from "@/features/members/api/use-get-members";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { useDeleteMember } from "@/features/members/api/use-delete-member";
 import { useUpdateMember } from "@/features/members/api/use-update-member";

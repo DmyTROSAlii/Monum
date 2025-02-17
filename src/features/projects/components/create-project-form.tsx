@@ -9,11 +9,12 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { createWorkspaceSchema } from "../schemas";
+import { createProjectSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import { useCreateWorkspace } from "../api/use-create-workspace";
+import { useCreateProject } from "../api/use-create-project";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
@@ -21,29 +22,30 @@ interface CreateWorkspaceFormProps {
   onCancel?: () => void;
 };
 
-export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
+export const CreateProjectForm = ({ onCancel }: CreateWorkspaceFormProps) => {
+  const workspaceId = useWorkspaceId();
   const router = useRouter();
-  const { mutate, isPending } = useCreateWorkspace();
+  const { mutate, isPending } = useCreateProject();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const form = useForm<z.infer<typeof createWorkspaceSchema>>({
-    resolver: zodResolver(createWorkspaceSchema),
+  const form = useForm<z.infer<typeof createProjectSchema>>({
+    resolver: zodResolver(createProjectSchema.omit({ workspaceId: true })),
     defaultValues: {
       name: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof createWorkspaceSchema>) => {
+  const onSubmit = (values: z.infer<typeof createProjectSchema>) => {
     const finalValues = {
       ...values,
+      workspaceId,
       image: values.image instanceof File ? values.image : "",
     };
 
     mutate({ form: finalValues }, {
       onSuccess: ({ data }) => {
         form.reset();
-        router.push(`/workspaces/${data.$id}`);
       }
     });
   };
@@ -59,7 +61,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
     <Card className="w-full h-full border-none shadow-none">
       <CardHeader className="flex p-7">
         <CardTitle className="text-xl font-bold">
-          Create a new workspace
+          Create a new project
         </CardTitle>
       </CardHeader>
       <div className="px-2 mx-8 h-0.5 bg-gray-200">
@@ -75,12 +77,12 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      Workspace Name
+                      Project Name
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        placeholder="Enter workspace name"
+                        placeholder="Enter project name"
                       />
                     </FormControl>
                     <FormMessage />
@@ -114,7 +116,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                         </Avatar>
                       )}
                       <div className="flex flex-col">
-                        <p className="text-sm">Workspace Icon</p>
+                        <p className="text-sm">Project Icon</p>
                         <p className="text-sm text-muted-foreground">
                           JPG, PNG, SVG or JPEG, max 1MB
                         </p>
@@ -179,7 +181,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                 size="lg"
                 disabled={isPending}
               >
-                Create Workspace
+                Create Project
               </Button>
             </div>
           </form>

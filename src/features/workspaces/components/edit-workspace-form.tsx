@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useConfirm } from "@/hooks/use-confirm";
-import { updateWorkspaceSchema } from "../shemas";
+import { updateWorkspaceSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeftIcon, CopyIcon, ImageIcon } from "lucide-react";
 import { Separator } from "@radix-ui/react-dropdown-menu";
