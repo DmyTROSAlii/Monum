@@ -2,16 +2,16 @@ import { z } from "zod";
 import { Hono } from "hono";
 import { ID, Query } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
-
-import { createAdminClient } from "@/lib/appwrite";
-import { getMember } from "@/features/members/utils";
-
-import { sessionMiddleware } from "@/lib/session-middleware";
 import { DATABASES_ID, MEMBERS_ID, PROJECTS_ID, TASKS_ID } from "@/config";
 
-import { TaskStatus } from "../types";
-import { createTaskSchema } from "../schemas";
 import { Project } from "@/features/projects/types";
+import { getMember } from "@/features/members/utils";
+
+import { createAdminClient } from "@/lib/appwrite";
+import { sessionMiddleware } from "@/lib/session-middleware";
+
+import { Task, TaskStatus } from "../types";
+import { createTaskSchema } from "../schemas";
 
 const app = new Hono()
   .get(
@@ -71,7 +71,7 @@ const app = new Hono()
         query.push(Query.equal("search", search));
       }
 
-      const tasks = await databases.listDocuments(
+      const tasks = await databases.listDocuments<Task>(
         DATABASES_ID,
         TASKS_ID,
         query
