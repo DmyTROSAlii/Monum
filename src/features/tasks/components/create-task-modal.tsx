@@ -2,7 +2,7 @@
 
 import { ResponsiveModal } from "@/components/responsice-modal";
 
-import { useCreateTaskModal } from "../hooks/use-create-project-modal";
+import { useCreateTaskModal } from "../hooks/use-create-task-modal";
 
 import { CreateTaskFormWrapper } from "./create-task-form-wrapper";
 
