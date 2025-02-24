@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback } from "react";
 import { useQueryState } from "nuqs";
 import { Loader, PlusIcon } from "lucide-react";
 import { Separator } from "@radix-ui/react-dropdown-menu";
@@ -10,11 +11,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 import { columns } from "./columns";
+import { TaskStatus } from "../types";
 import { DataTable } from "./data-table";
 import { DataKanban } from "./data-kanban";
 import { DataFilters } from "./data-filters";
 
 import { useGetTasks } from "../api/use-get-tasks";
+import { useBulkUpdateTask } from "../api/use-bulk-update-task";
+
 import { useTaskFilters } from "../hooks/use-task-filters";
 import { useCreateTaskModal } from "../hooks/use-create-task-modal";
 
@@ -30,8 +34,10 @@ export const TaskViewSwitcher = () => {
   });
 
   const workspaceId = useWorkspaceId();
-
   const { open } = useCreateTaskModal();
+
+  const { mutate: bulkUpdate } = useBulkUpdateTask();
+
   const {
     data: tasks,
     isLoading: isLoadingTasks
@@ -42,6 +48,14 @@ export const TaskViewSwitcher = () => {
     status,
     dueDate
   });
+
+  const onKanbanChange = useCallback((
+    tasks: { $id: string; status: TaskStatus; position: number}[]
+  ) => {
+    bulkUpdate({
+      json: { tasks },
+    });
+  }, [bulkUpdate])
 
   return (
     <Tabs
@@ -97,7 +111,7 @@ export const TaskViewSwitcher = () => {
               <DataTable columns={columns} data={tasks?.documents ?? []} />
             </TabsContent>
             <TabsContent value="kanban" className="mt-0">
-              <DataKanban data={tasks?.documents ?? []} />
+              <DataKanban onChange={onKanbanChange} data={tasks?.documents ?? []} />
             </TabsContent>
             <TabsContent value="calendar" className="mt-0">
               {JSON.stringify(tasks)}
