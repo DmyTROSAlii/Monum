@@ -75,7 +75,7 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
       param: { projectId: initialValues.$id }
     }, {
       onSuccess: () => {
-        form.reset();
+        router.push(`/workspaces/${initialValues.workspaceId}/projects/${initialValues.$id}`);
       },
     });
   };
@@ -100,7 +100,7 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
             {initialValues.name}
           </CardTitle>
         </CardHeader>
-        <div className="px-2 mx-8 h-0.5 bg-gray-200">
+        <div className="mx-8 h-0.5 bg-gray-200">
           <Separator />
         </div>
         <CardContent className="p-7">
@@ -198,7 +198,7 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
                   )}
                 />
               </div>
-              <div className="px-7 my-8 h-0.5 bg-gray-200">
+              <div className="my-8 h-0.5 bg-gray-200">
                 <Separator />
               </div>
               <div className="flex items-center justify-between">
@@ -236,7 +236,7 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
               <Separator />
             </div>
             <Button
-              className="mt-6 w-fit ml-auto"
+              className="w-fit ml-auto"
               size="sm"
               variant="destructive"
               type="button"

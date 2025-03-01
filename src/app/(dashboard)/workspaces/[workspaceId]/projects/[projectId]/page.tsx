@@ -9,7 +9,7 @@ import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { TaskViewSwitcher } from "@/features/tasks/components/task-view-switcher";
 
 interface ProjectPageProps {
-  params: { projectsId: string };
+  params: { projectId: string };
 }
 
 const ProjectPage = async ({
@@ -19,7 +19,7 @@ const ProjectPage = async ({
   if (!user) redirect("/sign-up");
 
   const initialValues = await getProject({
-    projectId: params.projectsId,
+    projectId: params.projectId,
   })
 
   if (!initialValues) {
@@ -27,7 +27,7 @@ const ProjectPage = async ({
   }
 
   return (
-    <div className="flex flex-col gap-t-4">
+    <div className="flex flex-col gap-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-x-2">
           <ProjectAvatar

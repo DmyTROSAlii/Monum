@@ -11,15 +11,15 @@ export const Sidebar = () => {
       <Link href="/">
         <Image src="/logo.svg" alt="logo" width={164} height={48} className="pl-3" />
       </Link>
-      <div className="px-7 h-0.5 m-3 bg-gray-200">
+      <div className="px-7 h-0.5 my-4 bg-gray-200">
         <Separator />
       </div>
       <WorkspaceSwitcher />
-      <div className="px-7 h-0.5 m-3 bg-gray-200">
+      <div className="px-7 h-0.5 my-4 bg-gray-200">
         <Separator />
       </div>
       <Navigation />
-      <div className="px-7 h-0.5 m-3 bg-gray-200">
+      <div className="px-7 h-0.5 my-4 bg-gray-200">
         <Separator />
       </div>
       <Projects />

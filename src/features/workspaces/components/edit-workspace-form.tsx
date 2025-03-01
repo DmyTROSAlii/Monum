@@ -295,7 +295,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
               <Separator />
             </div>
             <Button
-              className="mt-6 w-fit ml-auto"
+              className="w-fit ml-auto"
               size="sm"
               variant="destructive"
               type="button"

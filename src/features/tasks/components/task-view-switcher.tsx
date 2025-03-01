@@ -94,11 +94,11 @@ export const TaskViewSwitcher = () => {
             New Task
           </Button>
         </div>
-        <div className="px-2 mx-8 h-0.5 bg-gray-200">
+        <div className="px-2 my-3 h-0.5 bg-gray-200">
           <Separator />
         </div>
         <DataFilters />
-        <div className="px-2 mx-8 h-0.5 bg-gray-200">
+        <div className="px-2 my-3 h-0.5 bg-gray-200">
           <Separator />
         </div>
         {isLoadingTasks ? (
