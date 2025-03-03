@@ -6,7 +6,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 type ResponseType = InferResponseType<typeof client.api.tasks["bulk-update"]["$post"], 200>;
 type RequestType = InferRequestType<typeof client.api.tasks["bulk-update"]["$post"]>;
 
-export const useBulkUpdateTask = () => {
+export const useBulkUpdateTasks = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation<

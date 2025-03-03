@@ -11,15 +11,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 import { columns } from "./columns";
-import { TaskStatus } from "../types";
 import { DataTable } from "./data-table";
 import { DataKanban } from "./data-kanban";
 import { DataFilters } from "./data-filters";
+import { DataCalendar } from "./data-calendar";
 
+import { TaskStatus } from "../types";
 import { useGetTasks } from "../api/use-get-tasks";
-import { useBulkUpdateTask } from "../api/use-bulk-update-task";
-
 import { useTaskFilters } from "../hooks/use-task-filters";
+import { useBulkUpdateTasks } from "../api/use-bulk-update-task";
 import { useCreateTaskModal } from "../hooks/use-create-task-modal";
 
 export const TaskViewSwitcher = () => {
@@ -36,7 +36,7 @@ export const TaskViewSwitcher = () => {
   const workspaceId = useWorkspaceId();
   const { open } = useCreateTaskModal();
 
-  const { mutate: bulkUpdate } = useBulkUpdateTask();
+  const { mutate: bulkUpdate } = useBulkUpdateTasks();
 
   const {
     data: tasks,
@@ -113,8 +113,8 @@ export const TaskViewSwitcher = () => {
             <TabsContent value="kanban" className="mt-0">
               <DataKanban onChange={onKanbanChange} data={tasks?.documents ?? []} />
             </TabsContent>
-            <TabsContent value="calendar" className="mt-0">
-              {JSON.stringify(tasks)}
+            <TabsContent value="calendar" className="mt-0 h-full pb-4">
+              <DataCalendar data={tasks?.documents ?? []} />
             </TabsContent>
           </>
         )}
