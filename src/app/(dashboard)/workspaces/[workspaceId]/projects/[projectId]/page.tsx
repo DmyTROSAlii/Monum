@@ -12,7 +12,7 @@ interface ProjectPageProps {
   params: { projectId: string };
 }
 
-const ProjectPage = async ({
+const ProjectIdPage = async ({
   params,
 }: ProjectPageProps) => {
   const user = await getCurrent();
@@ -47,9 +47,9 @@ const ProjectPage = async ({
           </Button>
         </div>
       </div>
-      <TaskViewSwitcher />
+      <TaskViewSwitcher hideProjectFilter />
     </div>
   );
 };
 
-export default ProjectPage;
+export default ProjectIdPage;

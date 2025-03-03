@@ -22,7 +22,11 @@ import { useTaskFilters } from "../hooks/use-task-filters";
 import { useBulkUpdateTasks } from "../api/use-bulk-update-task";
 import { useCreateTaskModal } from "../hooks/use-create-task-modal";
 
-export const TaskViewSwitcher = () => {
+interface TaskViewSwitcherProps {
+  hideProjectFilter?: boolean;
+}
+
+export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) => {
   const [{
     status,
     assigneeId,
@@ -50,7 +54,7 @@ export const TaskViewSwitcher = () => {
   });
 
   const onKanbanChange = useCallback((
-    tasks: { $id: string; status: TaskStatus; position: number}[]
+    tasks: { $id: string; status: TaskStatus; position: number }[]
   ) => {
     bulkUpdate({
       json: { tasks },
@@ -97,7 +101,7 @@ export const TaskViewSwitcher = () => {
         <div className="px-2 my-3 h-0.5 bg-gray-200">
           <Separator />
         </div>
-        <DataFilters />
+        <DataFilters hideProjectFilter={hideProjectFilter} />
         <div className="px-2 my-3 h-0.5 bg-gray-200">
           <Separator />
         </div>
