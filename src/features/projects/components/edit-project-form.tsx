@@ -73,11 +73,12 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
     mutate({
       form: finalValues,
       param: { projectId: initialValues.$id }
-    }, {
-      onSuccess: () => {
-        router.push(`/workspaces/${initialValues.workspaceId}/projects/${initialValues.$id}`);
-      },
     });
+    // {
+    //   onSuccess: () => {
+    //     router.push(`/workspaces/${initialValues.workspaceId}/projects/${initialValues.$id}`);
+    //   },
+    // });
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
