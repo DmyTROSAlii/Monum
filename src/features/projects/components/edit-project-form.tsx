@@ -3,19 +3,18 @@
 import { z } from "zod";
 import Image from "next/image";
 import { useRef } from "react";
-import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from "@radix-ui/react-dropdown-menu";
+import { ArrowLeftIcon, ImageIcon } from "lucide-react";
 
-import { useForm } from "react-hook-form";
 import { useConfirm } from "@/hooks/use-confirm";
 
-import { ArrowLeftIcon, CopyIcon, ImageIcon } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
@@ -241,7 +240,7 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
               size="sm"
               variant="destructive"
               type="button"
-              disabled={isPending}
+              disabled={isPending || isDeletingProject}
               onClick={handleDelete}
             >
               Delete Project

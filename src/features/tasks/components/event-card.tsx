@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 
 import { TaskStatus } from "../types";
 
+import { Member } from "@/features/members/types";
 import { Project } from "@/features/projects/types";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
@@ -10,7 +11,7 @@ import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 interface EventCartProps {
   title: string;
-  assignee: any;
+  assignee: Member;
   project: Project;
   status: TaskStatus;
   id: string;

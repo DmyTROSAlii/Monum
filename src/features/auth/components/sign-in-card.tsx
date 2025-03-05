@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const SignInCard = () => {
     const { mutate, isPending } = useLogin();
@@ -109,7 +109,7 @@ export const SignInCard = () => {
             </div>
             <CardContent className="p-7 flex items-center justify-center">
                 <p>
-                    Don't have an account?
+                    Don$apos;t have an account?
                     <Link href="/sign-up">
                         <span className="text-blue-700"> Sign Up</span>
                     </Link>

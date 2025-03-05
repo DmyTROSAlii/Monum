@@ -3,7 +3,6 @@
 import { z } from "zod";
 import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 
@@ -16,7 +15,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 import { Task, TaskStatus } from "../types";
 import { createTaskSchema } from "../schemas";
@@ -30,8 +28,6 @@ interface CreateTaskFormProps {
 };
 
 export const EditTaskForm = ({ onCancel, projectOpions, memberOpions, initialValues }: CreateTaskFormProps) => {
-  const workspaceId = useWorkspaceId();
-  const router = useRouter();
   const { mutate, isPending } = useUpdateTask();
 
   const form = useForm<z.infer<typeof createTaskSchema>>({

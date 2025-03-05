@@ -1,4 +1,4 @@
-import { string, z } from "zod";
+import { z } from "zod";
 import { Hono } from "hono";
 import { ID, Query } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
@@ -118,7 +118,8 @@ const app = new Hono()
       );
 
       const assignees = await Promise.all(
-        members.documents.map(async (map) => {
+        // members.documents.map(async (map) => {
+        members.documents.map(async (member) => {
           const user = await users.get(member.userId);
 
           return {
@@ -340,7 +341,11 @@ const app = new Hono()
         return c.json({ error: "All tasks must belong to the same workspace" });
       }
 
-      const workspaceId: any = workspaceIds.values().next().value;
+      const workspaceId = workspaceIds.values().next().value;
+
+      if (!workspaceId) {
+        return c.json({ error: "Workspace ID is required" }, 400);
+      }
 
       const member = await getMember({
         databases,

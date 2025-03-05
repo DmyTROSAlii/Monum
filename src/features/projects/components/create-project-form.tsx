@@ -7,16 +7,19 @@ import { cn } from "@/lib/utils";
 import { ImageIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { createProjectSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import { useCreateProject } from "../api/use-create-project";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+
+import { createProjectSchema } from "../schemas";
+import { useCreateProject } from "../api/use-create-project";
 
 interface CreateWorkspaceFormProps {
   onCancel?: () => void;
