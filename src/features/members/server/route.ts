@@ -1,12 +1,14 @@
 import { z } from "zod";
 import { Hono } from "hono";
-import { getMember } from "../utils";
 import { Query } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
 import { createAdminClient } from "@/lib/appwrite";
 import { DATABASES_ID, MEMBERS_ID } from "@/config";
 import { sessionMiddleware } from "@/lib/session-middleware";
-import { MemberRole } from "../types";
+
+import { getMember } from "../utils";
+import { Member, MemberRole } from "../types";
+
 const app = new Hono()
   .get(
     "/",
@@ -28,11 +30,9 @@ const app = new Hono()
         return c.json({ error: "Unauthorized" }, 401);
       }
 
-      const members = await databases.listDocuments(
-        DATABASES_ID,
-        MEMBERS_ID,
-        [Query.equal("workspaceId", workspaceId)]
-      );
+      const members = await databases.listDocuments<Member>(DATABASES_ID, MEMBERS_ID, [
+        Query.equal("workspaceId", workspaceId),
+      ]);
 
       const populatedMembers = await Promise.all(
         members.documents.map(async (member) => {
@@ -42,7 +42,7 @@ const app = new Hono()
             ...member,
             name: user.name,
             email: user.email,
-          }
+          };
         })
       );
 
@@ -54,53 +54,45 @@ const app = new Hono()
       });
     }
   )
-  .delete(
-    "/:memberId",
-    sessionMiddleware,
-    async (c) => {
-      const { memberId } = c.req.param();
-      const user = c.get("user");
-      const databases = c.get("databases");
+  .delete("/:memberId", sessionMiddleware, async (c) => {
+    const { memberId } = c.req.param();
+    const user = c.get("user");
+    const databases = c.get("databases");
 
-      const memberToDelete = await databases.getDocument(
-        DATABASES_ID,
-        MEMBERS_ID,
-        memberId,
-      );
+    const memberToDelete = await databases.getDocument(
+      DATABASES_ID,
+      MEMBERS_ID,
+      memberId
+    );
 
-      const allMembersInWorkspace = await databases.listDocuments(
-        DATABASES_ID,
-        MEMBERS_ID,
-        [Query.equal("workspaceId", memberToDelete.workspaceId)]
-      );
+    const allMembersInWorkspace = await databases.listDocuments(
+      DATABASES_ID,
+      MEMBERS_ID,
+      [Query.equal("workspaceId", memberToDelete.workspaceId)]
+    );
 
-      const member = await getMember({
-        databases,
-        workspaceId: memberToDelete.workspaceId,
-        userId: user.$id
-      });
+    const member = await getMember({
+      databases,
+      workspaceId: memberToDelete.workspaceId,
+      userId: user.$id,
+    });
 
-      if (!member) {
-        return c.json({ error: "Unauthorized" }, 401);
-      }
-
-      if (member.$id !== memberToDelete.$id && member.role !== MemberRole.ADMIN) {
-        return c.json({ error: "Unauthorized" }, 401);
-      }
-
-      if (allMembersInWorkspace.total === 1) {
-        return c.json({ error: "Cannot delete the only member" }, 400);
-      }
-
-      await databases.deleteDocument(
-        DATABASES_ID,
-        MEMBERS_ID,
-        memberId,
-      );
-
-      return c.json({ data: { $id: memberToDelete.$id } });
+    if (!member) {
+      return c.json({ error: "Unauthorized" }, 401);
     }
-  )
+
+    if (member.$id !== memberToDelete.$id && member.role !== MemberRole.ADMIN) {
+      return c.json({ error: "Unauthorized" }, 401);
+    }
+
+    if (allMembersInWorkspace.total === 1) {
+      return c.json({ error: "Cannot delete the only member" }, 400);
+    }
+
+    await databases.deleteDocument(DATABASES_ID, MEMBERS_ID, memberId);
+
+    return c.json({ data: { $id: memberToDelete.$id } });
+  })
   .patch(
     "/:memberId",
     sessionMiddleware,
@@ -114,7 +106,7 @@ const app = new Hono()
       const memberToUpdate = await databases.getDocument(
         DATABASES_ID,
         MEMBERS_ID,
-        memberId,
+        memberId
       );
 
       const allMembersInWorkspace = await databases.listDocuments(
@@ -126,7 +118,7 @@ const app = new Hono()
       const member = await getMember({
         databases,
         workspaceId: memberToUpdate.workspaceId,
-        userId: user.$id
+        userId: user.$id,
       });
 
       if (!member) {
@@ -141,17 +133,12 @@ const app = new Hono()
         return c.json({ error: "Cannot downgrade the only member" }, 400);
       }
 
-      await databases.updateDocument(
-        DATABASES_ID,
-        MEMBERS_ID,
-        memberId,
-        {
-          role,
-        }
-      );
+      await databases.updateDocument(DATABASES_ID, MEMBERS_ID, memberId, {
+        role,
+      });
 
       return c.json({ data: { $id: memberToUpdate.$id } });
     }
-  )
+  );
 
 export default app;

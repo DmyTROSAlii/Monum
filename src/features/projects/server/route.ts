@@ -4,18 +4,19 @@ import { ID, Query } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
 import { endOfMonth, startOfMonth, subMonths } from "date-fns";
 
+import { TaskStatus } from "@/features/tasks/types";
 import { getMember } from "@/features/members/utils";
 
-import { Project } from "../types";
 import { sessionMiddleware } from "@/lib/session-middleware";
-import { createProjectSchema, updateProjectSchema } from "../schemas";
 import {
   DATABASES_ID,
   IMAGES_BUCKET_ID,
   PROJECTS_ID,
   TASKS_ID,
 } from "@/config";
-import { TaskStatus } from "@/features/tasks/types";
+
+import { Project } from "../types";
+import { createProjectSchema, updateProjectSchema } from "../schemas";
 
 const app = new Hono()
   .post(
@@ -96,7 +97,7 @@ const app = new Hono()
         return c.json({ error: "Unauthorized" }, 401);
       }
 
-      const projects = await databases.listDocuments(
+      const projects = await databases.listDocuments<Project>(
         DATABASES_ID,
         PROJECTS_ID,
         [Query.equal("workspaceId", workspaceId), Query.orderDesc("$createdAt")]
