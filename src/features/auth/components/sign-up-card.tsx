@@ -5,12 +5,16 @@ import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import { registerScheme } from "../schemas";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useRegister } from "../api/use-register";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from "@radix-ui/react-dropdown-menu";
+
+import { registerScheme } from "../schemas";
+import { useRegister } from "../api/use-register";
+
+import { signUpWithGithub } from "@/lib/oauth";
+
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -121,6 +125,7 @@ export const SignUpCard = () => {
                     Login with Google
                 </Button>
                 <Button
+                    onClick={() => signUpWithGithub()}
                     disabled={isPending}
                     variant="secondary"
                     size="lg"
