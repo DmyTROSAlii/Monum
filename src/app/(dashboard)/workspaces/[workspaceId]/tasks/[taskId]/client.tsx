@@ -26,7 +26,7 @@ export const TaskIdClient = () => {
   return (
     <div className="flex flex-col">
       <TaskBreadcrumbs project={data.project} task={data} />
-      <div className="px-2 mx-8 my-6 h-0.5 bg-gray-200">
+      <div className="my-6 h-0.5 bg-gray-200">
         <Separator />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

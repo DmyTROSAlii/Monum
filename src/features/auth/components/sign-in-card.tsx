@@ -114,7 +114,7 @@ export const SignInCard = () => {
             </div>
             <CardContent className="p-7 flex items-center justify-center">
                 <p>
-                    Don$apos;t have an account?
+                    Don`t have an account?
                     <Link href="/sign-up">
                         <span className="text-blue-700"> Sign Up</span>
                     </Link>

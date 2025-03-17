@@ -43,7 +43,7 @@ export const TaskDescription = ({ task }: TaskDescriptionProps) => {
           {isEditing ? "Cancel" : "Edit"}
         </Button>
       </div>
-      <div className="px-2 mx-8 my-4 h-0.5 bg-gray-200">
+      <div className="my-4 h-0.5 bg-gray-200">
         <Separator />
       </div>
       {isEditing ? (
