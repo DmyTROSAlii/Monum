@@ -72,7 +72,7 @@ export const TasksList = ({ data, total }: TasksListProps) => {
               Assigned Tasks ({total})
             </p>
             <Button variant="muted" size="icon" onClick={createTask}>
-              <PlusIcon className="size-4 text-neutral-400" />
+              <PlusIcon className="size-4 text-neutral-400 dark:text-neutral-800" />
             </Button>
           </div>
           <div className="px-2 mx-8 my-4 w-full h-0.5 bg-gray-200">
@@ -104,7 +104,7 @@ export const TasksList = ({ data, total }: TasksListProps) => {
               No task found
             </li>
           </ul>
-          <Button variant="muted" className="mt-4 w-full" asChild>
+          <Button variant="muted" className="mt-4 w-full dark:hover:text-neutral-900" asChild>
             <Link href={`/workspaces/${workspaceId}/tasks`}>
               Show all
             </Link>
@@ -126,14 +126,14 @@ export const ProjectsList = ({ data, total }: ProjectsListProps) => {
 
   return (
     <div className="flex flex-col gap-y-4 col-span-1">
-      <div className="bg-white border rounded-lg p-4">
+      <div className="bg-white dark:bg-neutral-800 border rounded-lg p-4">
         <div className="flex flex-col items-center">
           <div className="flex w-full justify-between">
             <p className="text-lg font-semibold">
               Projects ({total})
             </p>
             <Button variant="secondary" size="icon" onClick={createProject}>
-              <PlusIcon className="size-4 text-neutral-400" />
+              <PlusIcon className="size-4 text-neutral-400 dark:text-neutral-800" />
             </Button>
           </div>
           <div className="px-2 mx-8 my-4 w-full h-0.5 bg-gray-200">
@@ -179,7 +179,7 @@ export const MembersList = ({ data, total }: MemberstListProps) => {
 
   return (
     <div className="flex flex-col gap-y-4 col-span-1">
-      <div className="bg-white border rounded-lg p-4">
+      <div className="bg-white dark:bg-neutral-800 border rounded-lg p-4">
         <div className="flex flex-col items-center">
           <div className="flex w-full justify-between">
             <p className="text-lg font-semibold">
@@ -187,7 +187,7 @@ export const MembersList = ({ data, total }: MemberstListProps) => {
             </p>
             <Button asChild variant="secondary" size="icon">
               <Link href={`/workspaces/${workspaceId}/members`}>
-                <SettingsIcon className="size-4 text-neutral-400" />
+                <SettingsIcon className="size-4 text-neutral-400 dark:text-neutral-800" />
               </Link>
             </Button>
           </div>

@@ -4,6 +4,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer base {
@@ -78,4 +79,8 @@ body {
 
 .hide-scrollbar::--webkit-scrollbar {
   display: none;
+}
+
+.dark #logo {
+  filter: invert(95%) sepia(11%) saturate(67%) hue-rotate(183deg) brightness(97%) contrast(90%);
 }

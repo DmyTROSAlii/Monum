@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:bg-neutral-100 disabled:from-neutral-100 disabled:to-neutral-100 disabled:text-neutral-300 border border-neutral-200 shadow-sm [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:bg-neutral-100 disabled:from-neutral-100 disabled:to-neutral-100 disabled:text-neutral-300 border border-neutral-200 dark:border-none shadow-sm [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -16,9 +16,9 @@ const buttonVariants = cva(
         outline:
           "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-white text-black hover:bg-neutral-100",
+          "bg-white dark:bg-neutral-400 text-black hover:bg-neutral-100 dark:hover:bg-neutral-600",
         ghost: "border-transparent shadow-none hover:bg-accent hover:text-accent-foreground",
-        muted: "bg-neutral-200 text-neutral-600 hover:bg-neutral-200/80",
+        muted: "bg-neutral-200 dark:bg-neutral-400 text-neutral-600 hover:bg-neutral-200/80 dark:hover:bg-neutral-600",
         teritary: "bg-blue-100 text-blue-600 border-transparent hover:bg-blue-200 shadow-none",
       },
       size: {

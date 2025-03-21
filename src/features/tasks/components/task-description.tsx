@@ -57,7 +57,7 @@ export const TaskDescription = ({ task }: TaskDescriptionProps) => {
           />
           <Button
             size="sm"
-            className="w-fit ml-auto"
+            className="w-fit ml-auto dark:text-neutral-200"
             onClick={handleSave}
             disabled={isPending}
           >

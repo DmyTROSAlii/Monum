@@ -41,8 +41,17 @@
 
 .rbc-today {
   background: inherit;
+  background-color: #377d80 !important;
 }
 
-.rbc-off-range-bg {
-  background: inherit;
+.rbc-date-cell.rbc-now.rbc-current > .rbc-button-link {
+  color: #fff !important;
+}
+
+:dark .rbc-off-range-bg {
+  background: #636363;
+}
+
+:dark .rbc-month-row {
+  border-color: #fff;
 }

@@ -2,16 +2,20 @@
 
 import Link from "next/link";
 import { Fragment } from "react";
-import { Button } from "@/components/ui/button";
-import { useConfirm } from "@/hooks/use-confirm";
-import { MemberRole } from "@/features/members/types";
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import { useWorkspaceId } from "../hooks/use-workspace-id";
 import { ArrowLeftIcon, MoreVerticalIcon } from "lucide-react";
+
+import { useConfirm } from "@/hooks/use-confirm";
+
+import { useWorkspaceId } from "../hooks/use-workspace-id";
+
+import { MemberRole } from "@/features/members/types";
 import { useGetMembers } from "@/features/members/api/use-get-members";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { useDeleteMember } from "@/features/members/api/use-delete-member";
 import { useUpdateMember } from "@/features/members/api/use-update-member";
+
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
@@ -89,7 +93,7 @@ export const MemberList = () => {
                       variant="secondary"
                       size="icon"
                     >
-                      <MoreVerticalIcon className="size-4 text-muted-foreground" />
+                      <MoreVerticalIcon className="size-4 text-muted-foreground dark:text-neutral-800" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent side="bottom" align="end">

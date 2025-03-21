@@ -67,7 +67,7 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) =
     <Tabs
       defaultValue={view}
       onValueChange={setView}
-      className="flex-1 w-full border rounded-lg"
+      className="flex-1 w-full border dark:border-white rounded-lg"
     >
       <div className="h-full flex flex-col overflow-auto p-4">
         <div className="flex flex-col gap-y-2 lg:flex-row justify-between items-center">
@@ -93,7 +93,7 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) =
           </TabsList>
           <Button
             size="sm"
-            className="w-full lg:w-auto"
+            className="w-full lg:w-auto border-none dark:text-neutral-200"
             onClick={open}
           >
             <PlusIcon className="size-4 mr-2" />

@@ -9,6 +9,7 @@ import {
   subMonths
 } from "date-fns";
 import { enUS } from "date-fns/locale";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 
 import { Task } from "../types";
@@ -18,7 +19,6 @@ import { EventCard } from "./event-card";
 import { Button } from "@/components/ui/button";
 
 import "./data-calendar.css";
-import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const locales = {
   "en-US": enUS,
@@ -47,9 +47,10 @@ const CustomToolbar = ({ date, onNavigate }: CustomToolbarProps) => {
       <Button
         onClick={() => onNavigate("PREV")}
         variant="secondary"
+        className="dark:bg-transparent"
         size="icon"
       >
-        <ChevronLeftIcon className="size-4" />
+        <ChevronLeftIcon className="size-4 dark:text-neutral-200" />
       </Button>
       <div className="flex items-center border border-input rounded-md px-3 py-2 h-8 justify-center w-full lg:w-auto">
         <CalendarIcon className="size-4 mr-2" />
@@ -58,9 +59,10 @@ const CustomToolbar = ({ date, onNavigate }: CustomToolbarProps) => {
       <Button
         onClick={() => onNavigate("NEXT")}
         variant="secondary"
+        className="dark:bg-transparent"
         size="icon"
       >
-        <ChevronRightIcon className="size-4" />
+        <ChevronRightIcon className="size-4 dark:text-neutral-200" />
       </Button>
     </div>
   )
