@@ -13,6 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+import { useProjectId } from "@/features/projects/hooks/use-project-id";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
@@ -28,12 +29,14 @@ interface CreateTaskFormProps {
 };
 
 export const CreateTaskForm = ({ onCancel, projectOpions, memberOpions }: CreateTaskFormProps) => {
+  const projectId = useProjectId();
   const workspaceId = useWorkspaceId();
   const { mutate, isPending } = useCreateTask();
 
   const form = useForm<z.infer<typeof createTaskSchema>>({
     resolver: zodResolver(createTaskSchema.omit({ workspaceId: true })),
     defaultValues: {
+      projectId: projectId,
       workspaceId
     },
   });
