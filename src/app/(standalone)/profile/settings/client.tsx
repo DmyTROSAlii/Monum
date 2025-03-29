@@ -7,21 +7,22 @@ import { EditWorkspaceForm } from "@/features/workspaces/components/edit-workspa
 import { PageError } from "@/components/page-error";
 import { PageLoader } from "@/components/page-loader";
 
-export const WorkspaceIdSettingClient = () => {
-  const workspaceId = useWorkspaceId();
-  const { data: initialValues, isLoading } = useGetWorkspace({ workspaceId });
+export const ProfileIdSettingClient = () => {
+  // const workspaceId = useWorkspaceId();
+  // const { data: initialValues, isLoading } = useGetWorkspace({ workspaceId });
 
-  if (isLoading) {
-    return <PageLoader />
-  }
+  // if (isLoading) {
+  //   return <PageLoader />
+  // }
 
-  if (!initialValues) {
-    return <PageError message="Workspace not found" />
-  }
+  // if (!initialValues) {
+  //   return <PageError message="Workspace not found" />
+  // }
 
   return (
     <div className="w-full lg:max-w-xl">
-      <EditWorkspaceForm initialValues={initialValues} />
+      Profile Settings
+      {/* <EditWorkspaceForm initialValues={initialValues} /> */}
     </div>
   );
 };

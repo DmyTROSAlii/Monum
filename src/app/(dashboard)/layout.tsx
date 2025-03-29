@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/navbat";
+import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
 
 import { EditTaskModal } from "@/features/tasks/components/edit-task-modal";
