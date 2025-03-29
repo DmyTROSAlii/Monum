@@ -238,6 +238,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
                   type="submit"
                   size="lg"
                   disabled={isPending}
+                  className="dark:text-neutral-200"
                 >
                   Save changes
                 </Button>

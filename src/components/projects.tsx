@@ -31,7 +31,7 @@ export const Projects = () => {
             <div
               className={cn(
                 "flex items-center gap-2.5 p-2.5 rounded-md hover:text-primary transition cursor-pointer text-neutral-500",
-                isActive && "bg-white dark:bg-neutral-800 shadow-sm hover:opacity-100 text-primary"
+                isActive && "bg-white dark:bg-zinc-700 shadow-sm hover:opacity-100 text-primary"
               )}
             >
               <ProjectAvatar image={project.imageUrl} name={project.name} />

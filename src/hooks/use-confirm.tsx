@@ -40,7 +40,7 @@ export const useConfirm = (
             <CardDescription>{message}</CardDescription>
           </CardHeader>
           <div className="pt-4 w-full flex flex-col gap-3 lg:flex-row gap-x-w items-center justify-end">
-            <Button onClick={handleCancel} variant="outline" className="w-full lg:w-auto">
+            <Button onClick={handleCancel} variant="outline" className="w-full lg:w-auto dark:hover:bg-zinc-900">
               Cancel
             </Button>
             <Button onClick={handleConfirm} variant={variant} className="w-full lg:w-auto">

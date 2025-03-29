@@ -12,7 +12,7 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen dark:bg-zinc-900">
       <CreateWorkspaceModal />
       <CreateProjectModal />
       <CreateTaskModal />

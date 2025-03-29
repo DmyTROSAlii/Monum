@@ -7,7 +7,7 @@ import { Separator } from "@radix-ui/react-dropdown-menu";
 
 export const Sidebar = () => {
   return (
-    <aside className="h-full bg-neutral-100 dark:bg-neutral-900 p-4 w-full">
+    <aside className="h-full bg-neutral-100 dark:bg-zinc-800 p-4 w-full">
       <Link href="/" className="flex justify-center items-center mr-2">
         <Image src="/logo.svg" id="logo" alt="logo" width={164} height={48} />
       </Link>

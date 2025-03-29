@@ -105,7 +105,7 @@ export const SignUpCard = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button disabled={isPending} size="lg" className="w-full">
+                        <Button disabled={isPending} size="lg" className="w-full dark:text-neutral-200">
                             Register
                         </Button>
                     </form>
@@ -122,7 +122,7 @@ export const SignUpCard = () => {
                     className="w-full"
                 >
                     <FcGoogle className="mr-2 size-5" />
-                    Login with Google
+                    Sign up with Google
                 </Button>
                 <Button
                     onClick={() => signUpWithGithub()}
@@ -132,7 +132,7 @@ export const SignUpCard = () => {
                     className="w-full"
                 >
                     <FaGithub className="mr-2 size-5" />
-                    Login with Github
+                    Sign up with Github
                 </Button>
             </CardContent>
             <div className="px-7 h-0.5 bg-gray-200">

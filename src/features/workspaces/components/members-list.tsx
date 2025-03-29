@@ -93,7 +93,7 @@ export const MemberList = () => {
                       variant="secondary"
                       size="icon"
                     >
-                      <MoreVerticalIcon className="size-4 text-muted-foreground dark:text-neutral-800" />
+                      <MoreVerticalIcon className="size-4 text-muted-foreground dark:text-zinc-800" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent side="bottom" align="end">
