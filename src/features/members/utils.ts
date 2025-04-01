@@ -21,7 +21,5 @@ export const getMember = async ({
     ],
   );
 
-  console.log(members)
-
   return members.documents[0];
 }

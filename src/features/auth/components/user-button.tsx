@@ -1,6 +1,8 @@
 "use client";
 
-import { Loader, LogOut } from "lucide-react";
+import Link from "next/link";
+
+import { Loader, LogOut, SettingsIcon } from "lucide-react";
 
 import { useLogout } from "../api/use-logout";
 import { useCurrent } from "../api/use-current";
@@ -64,7 +66,21 @@ export const UserButton = () => {
                     <Separator />
                 </div>
                 <DropdownMenuItem className="h-10 flex justify-center items-center cursor-pointer">
-                    <ThemeSwitcher />
+                    <Link key="Profile Settings" href={`/profile/${user.$id}`}>
+                        <div className="flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-neutral-500">
+                            <SettingsIcon className="size-5 text-neutral-500" />
+                            Settings
+                        </div>
+                    </Link>
+                </DropdownMenuItem>
+                <div className="px-7 h-0.5 bg-gray-200">
+                    <Separator />
+                </div>
+                <DropdownMenuItem className="h-10 flex justify-center items-center cursor-pointer">
+                    <div className="flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-neutral-500">
+                        <ThemeSwitcher />
+                        Theme Mode
+                    </div>
                 </DropdownMenuItem>
                 <div className="px-7 h-0.5 bg-gray-200">
                     <Separator />

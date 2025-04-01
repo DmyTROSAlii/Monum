@@ -2,10 +2,10 @@
 
 import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { EditWorkspaceForm } from "@/features/workspaces/components/edit-workspace-form";
 
 import { PageError } from "@/components/page-error";
 import { PageLoader } from "@/components/page-loader";
+import { useCurrent } from "@/features/auth/api/use-current";
 
 export const ProfileIdSettingClient = () => {
   // const workspaceId = useWorkspaceId();
@@ -19,9 +19,19 @@ export const ProfileIdSettingClient = () => {
   //   return <PageError message="Workspace not found" />
   // }
 
+  // const { data: user, isLoading } = useCurrent();
+
+  // if (!user) {
+  //   console.log("not find user")
+  //   console.log(user)
+  // } else {
+  //   console.log("Profile Settings:")
+  //   console.log(user)
+  // }
+
   return (
     <div className="w-full lg:max-w-xl">
-      Profile Settings
+      Profile Settings:
       {/* <EditWorkspaceForm initialValues={initialValues} /> */}
     </div>
   );
