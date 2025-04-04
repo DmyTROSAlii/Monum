@@ -11,12 +11,12 @@ import { Separator } from "@radix-ui/react-dropdown-menu";
 import { loginScheme } from "../schemas";
 import { useLogin } from "../api/use-login";
 
-import { signUpWithGithub } from "@/lib/oauth";
+import { signUpWithGithub, signUpWithGoogle } from "@/lib/oauth";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 
 export const SignInCard = () => {
     const { mutate, isPending } = useLogin();
@@ -90,6 +90,7 @@ export const SignInCard = () => {
             </div>
             <CardContent className="p-7 flex flex-col gap-y-4">
                 <Button
+                    onClick={() => signUpWithGoogle()}
                     disabled={isPending}
                     variant="secondary"
                     size="lg"

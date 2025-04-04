@@ -11,7 +11,7 @@ import { Separator } from "@radix-ui/react-dropdown-menu";
 import { registerScheme } from "../schemas";
 import { useRegister } from "../api/use-register";
 
-import { signUpWithGithub } from "@/lib/oauth";
+import { signUpWithGithub, signUpWithGoogle } from "@/lib/oauth";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -116,6 +116,7 @@ export const SignUpCard = () => {
             </div>
             <CardContent className="p-7 flex flex-col gap-y-4">
                 <Button
+                    onClick={() => signUpWithGoogle()}
                     disabled={isPending}
                     variant="secondary"
                     size="lg"
