@@ -22,18 +22,16 @@ export const useDeleteProfile = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to delete profile");
+        throw new Error("Failed to clear profile`s data");
       }
 
       return await response.json();
     },
     onSuccess: () => {
-      toast.success("Profile deleted");
-
-      router.push("/sign-in");
+      toast.success("Profile`s data cleared");
     },
     onError: () => {
-      toast.error("Failed to delete profile");
+      toast.error("Failed to clear profile`s data");
     },
   });
 

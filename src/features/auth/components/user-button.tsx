@@ -1,7 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import { useTheme } from "next-themes";
 
+import { useState, useEffect } from "react";
+
+import { FiSun, FiMoon } from "react-icons/fi";
 import { Loader, LogOut, SettingsIcon } from "lucide-react";
 
 import { useLogout } from "../api/use-logout";
@@ -14,12 +19,12 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
-import ThemeSwitcher from "@/components/theme-switcher";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export const UserButton = () => {
     const { mutate: logout } = useLogout();
     const { data: user, isLoading } = useCurrent();
+    const { setTheme, resolvedTheme } = useTheme();
 
     if (isLoading) {
         return (
@@ -76,9 +81,16 @@ export const UserButton = () => {
                 <div className="px-7 h-0.5 bg-gray-200">
                     <Separator />
                 </div>
-                <DropdownMenuItem className="h-10 flex justify-center items-center cursor-pointer">
+                <DropdownMenuItem
+                    className="h-10 flex justify-center items-center cursor-pointer"
+                    onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+                >
                     <div className="flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-neutral-500">
-                        <ThemeSwitcher />
+                        {resolvedTheme === "dark" ? (
+                            <FiSun /> 
+                        ) : (
+                            <FiMoon />
+                        )}
                         Theme Mode
                     </div>
                 </DropdownMenuItem>

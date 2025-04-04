@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { ID } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
 import { deleteCookie, setCookie } from "hono/cookie";
 
@@ -8,6 +8,7 @@ import { sessionMiddleware } from "@/lib/session-middleware";
 
 import { AUTH_COOKIE } from "../constants";
 import { loginScheme, registerScheme, updateProfileScheme } from "../schemas";
+import { DATABASES_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
 
 const app = new Hono()
   .get("/current", sessionMiddleware, (c) => {
@@ -59,44 +60,59 @@ const app = new Hono()
 
     return c.json({ success: true });
   })
-  .patch("/profile/:profileId", zValidator("form", updateProfileScheme), sessionMiddleware,  async (c) => {
-    const user = c.get("user");
-    const account = c.get("account");
+  .patch(
+    "/profile/:profileId",
+    zValidator("form", updateProfileScheme),
+    sessionMiddleware,
+    async (c) => {
+      const user = c.get("user");
+      const account = c.get("account");
 
-    const { profileId } = c.req.param();
-    const { name, email, password } = c.req.valid("form");
+      const { profileId } = c.req.param();
+      const { name, email, password } = c.req.valid("form");
 
-    if (user.$id !== profileId) {
-      return c.json({ error: "Unauthorized" }, 401);
-    }
-
-    if (name && name !== user.name) {
-      await account.updateName(name);
-    }
-
-    if (email && password && email !== user.email) {
-      try {
-        await account.updateEmail(email, password);
-      } catch (e) {
-        return c.json({ error: e });
+      if (user.$id !== profileId) {
+        return c.json({ error: "Unauthorized" }, 401);
       }
-    }
 
-    return c.json({ data: { name, email } });
-  }
-)
+      if (name && name !== user.name) {
+        await account.updateName(name);
+      }
+
+      if (email && password && email !== user.email) {
+        try {
+          await account.updateEmail(email, password);
+        } catch (e) {
+          return c.json({ error: e });
+        }
+      }
+
+      return c.json({ data: { name, email } });
+    }
+  )
   .delete("/profile/:profileId", sessionMiddleware, async (c) => {
-    const users = c.get("users");
+    const databases = c.get("databases");
 
     const { profileId } = c.req.param();
 
     try {
-      await users.delete(profileId);
+      const membersList = await databases.listDocuments(
+        DATABASES_ID,
+        MEMBERS_ID,
+        [Query.equal("userId", profileId)]
+      );
+
+      for (const document of membersList.documents) {
+        await databases.deleteDocument(DATABASES_ID, MEMBERS_ID, document.$id);
+      }
     } catch (error) {
-      console.error("Error deleting user:", error);
+      return c.json(
+        { error: "Failed to delete user data", details: error },
+        500
+      );
     }
 
-    return c.json({ data: { $id: profileId } });
+    return c.json({ success: true, data: { $id: profileId } });
   });
 
 export default app;

@@ -39,7 +39,7 @@ export const ProfileCard = ({ onCancel, initialValues }: ProfileCardProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [DeleteDialog, confirmDelete] = useConfirm(
-    "Delete Profile",
+    "Delete Profile`s Data",
     "This action cannot be undone.",
     "destructive",
   );
@@ -60,7 +60,7 @@ export const ProfileCard = ({ onCancel, initialValues }: ProfileCardProps) => {
       param: { profileId: initialValues.id },
     }, {
       onSuccess: () => {
-        window.location.href = "/sign-up";
+        window.location.href = "/";
       },
     });
   };
@@ -222,7 +222,7 @@ export const ProfileCard = ({ onCancel, initialValues }: ProfileCardProps) => {
           <div className="flex flex-col">
             <h3 className="font-bold">Danger Zone</h3>
             <p className="text-sm text-muted-foreground">
-              Deleting a profile is irreversible and will remove all associated data.
+              Clear a profile`s data is irreversible and will remove all associated data.
             </p>
             <div className="my-8 h-0.5 bg-gray-200">
               <Separator />
@@ -235,7 +235,7 @@ export const ProfileCard = ({ onCancel, initialValues }: ProfileCardProps) => {
               disabled={isPending || isDeletingProfile}
               onClick={handleDelete}
             >
-              Delete Profile
+              Clear Profile`s Data
             </Button>
           </div>
         </CardContent>
