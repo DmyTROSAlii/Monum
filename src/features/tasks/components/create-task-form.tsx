@@ -24,11 +24,12 @@ import { useCreateTask } from "../api/use-create-task";
 
 interface CreateTaskFormProps {
   onCancel?: () => void;
+  status?: TaskStatus | string | undefined;
   projectOpions: { id: string, name: string, imageUrl: string }[];
   memberOpions: { id: string, name: string }[];
 };
 
-export const CreateTaskForm = ({ onCancel, projectOpions, memberOpions }: CreateTaskFormProps) => {
+export const CreateTaskForm = ({ onCancel, status, projectOpions, memberOpions }: CreateTaskFormProps) => {
   const projectId = useProjectId();
   const workspaceId = useWorkspaceId();
   const { mutate, isPending } = useCreateTask();
@@ -37,7 +38,8 @@ export const CreateTaskForm = ({ onCancel, projectOpions, memberOpions }: Create
     resolver: zodResolver(createTaskSchema.omit({ workspaceId: true })),
     defaultValues: {
       projectId: projectId,
-      workspaceId
+      workspaceId,
+      status: Object.values(TaskStatus).includes(status as TaskStatus) ? (status as TaskStatus) : undefined,
     },
   });
 

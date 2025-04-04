@@ -50,7 +50,7 @@ export const KanbanColumnHeader = ({
           {taskCount}
         </div>
       </div>
-      <Button onClick={open} variant="ghost" size="icon" className="size-5">
+      <Button onClick={() => open(board)} variant="ghost" size="icon" className="size-5">
         <PlusIcon className="size-4 text-neutral-500" />
       </Button>
     </div>
