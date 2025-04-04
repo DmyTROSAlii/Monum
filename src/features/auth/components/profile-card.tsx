@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 
-import { useRef } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { ArrowLeftIcon } from "lucide-react";
