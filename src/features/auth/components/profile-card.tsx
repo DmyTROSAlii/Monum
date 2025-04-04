@@ -70,7 +70,7 @@ export const ProfileCard = ({ onCancel, initialValues }: ProfileCardProps) => {
       param: { profileId: initialValues.id }
     });
 
-    router.push("/");
+    window.location.href = "/";
   };
 
   return (
