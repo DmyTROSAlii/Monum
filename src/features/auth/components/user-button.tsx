@@ -1,10 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useTheme } from "next-themes";
-
-import { useState, useEffect } from "react";
 
 import { FiSun, FiMoon } from "react-icons/fi";
 import { Loader, LogOut, SettingsIcon } from "lucide-react";
@@ -87,7 +84,7 @@ export const UserButton = () => {
                 >
                     <div className="flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-neutral-500">
                         {resolvedTheme === "dark" ? (
-                            <FiSun /> 
+                            <FiSun />
                         ) : (
                             <FiMoon />
                         )}

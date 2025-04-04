@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { useRef } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import { ArrowLeftIcon, CopyIcon, ImageIcon } from "lucide-react";
+import { ArrowLeftIcon } from "lucide-react";
 
 import { Separator } from "@radix-ui/react-dropdown-menu";
 
@@ -16,7 +15,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
@@ -35,8 +33,6 @@ export const ProfileCard = ({ onCancel, initialValues }: ProfileCardProps) => {
   const router = useRouter();
   const { mutate, isPending } = useUpdateProfile();
   const { mutate: deleteProfile, isPending: isDeletingProfile } = useDeleteProfile();
-
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const [DeleteDialog, confirmDelete] = useConfirm(
     "Delete Profile`s Data",

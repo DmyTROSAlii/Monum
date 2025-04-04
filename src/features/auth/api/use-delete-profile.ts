@@ -2,7 +2,6 @@ import { toast } from "sonner";
 import { client } from "@/lib/rpc";
 import { InferRequestType, InferResponseType } from "hono";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 
 type ResponseType = InferResponseType<
   (typeof client.api.auth.profile)[":profileId"]["$delete"],
@@ -13,8 +12,6 @@ type RequestType = InferRequestType<
 >;
 
 export const useDeleteProfile = () => {
-  const router = useRouter();
-
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async ({ param }) => {
       const response = await client.api.auth.profile[":profileId"]["$delete"]({

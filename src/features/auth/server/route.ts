@@ -8,7 +8,7 @@ import { sessionMiddleware } from "@/lib/session-middleware";
 
 import { AUTH_COOKIE } from "../constants";
 import { loginScheme, registerScheme, updateProfileScheme } from "../schemas";
-import { DATABASES_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
+import { DATABASES_ID, MEMBERS_ID } from "@/config";
 
 const app = new Hono()
   .get("/current", sessionMiddleware, (c) => {

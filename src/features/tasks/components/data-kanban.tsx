@@ -136,7 +136,7 @@ export const DataKanban = ({ data, onChange }: DataKanbanProps) => {
     })
 
     onChange(updatesPayload);
-  }, [onchange]);
+  }, [onChange]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
