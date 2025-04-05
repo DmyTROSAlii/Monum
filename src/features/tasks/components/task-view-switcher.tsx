@@ -94,7 +94,7 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) =
           <Button
             size="sm"
             className="w-full lg:w-auto border-none dark:text-neutral-200"
-            onClick={open}
+            onClick={() => open()}
           >
             <PlusIcon className="size-4 mr-2" />
             New Task

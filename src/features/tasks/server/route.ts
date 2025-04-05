@@ -2,7 +2,13 @@ import { z } from "zod";
 import { Hono } from "hono";
 import { ID, Query } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
-import { DATABASES_ID, MEMBERS_ID, PROJECTS_ID, TASKS_ID } from "@/config";
+import {
+  COMMENTS_ID,
+  DATABASES_ID,
+  MEMBERS_ID,
+  PROJECTS_ID,
+  TASKS_ID,
+} from "@/config";
 
 import { Project } from "@/features/projects/types";
 import { getMember } from "@/features/members/utils";
@@ -10,8 +16,9 @@ import { getMember } from "@/features/members/utils";
 import { createAdminClient } from "@/lib/appwrite";
 import { sessionMiddleware } from "@/lib/session-middleware";
 
-import { Task, TaskStatus } from "../types";
-import { createTaskSchema } from "../schemas";
+import { Comment, Task, TaskStatus } from "../types";
+import { createTaskComment, createTaskSchema } from "../schemas";
+import { comment } from "postcss";
 
 const app = new Hono()
   .delete("/:taskId", sessionMiddleware, async (c) => {
@@ -272,7 +279,7 @@ const app = new Hono()
     });
 
     if (!currentMember) {
-      return c.json({ error: "Unaythorized" }, 401);
+      return c.json({ error: "Unathorized" }, 401);
     }
 
     const project = await databases.getDocument<Project>(
@@ -285,6 +292,12 @@ const app = new Hono()
       DATABASES_ID,
       MEMBERS_ID,
       task.assigneeId
+    );
+
+    const comments = await databases.listDocuments<Comment>(
+      DATABASES_ID,
+      COMMENTS_ID,
+      [Query.equal("taskId", taskId)]
     );
 
     const user = await users.get(member.userId);
@@ -300,6 +313,7 @@ const app = new Hono()
         ...task,
         project,
         assignee,
+        comments,
       },
     });
   })
@@ -368,6 +382,36 @@ const app = new Hono()
       );
 
       return c.json({ data: updatedTasks });
+    }
+  )
+  .post(
+    "/tasks/:taskId/comment",
+    sessionMiddleware,
+    zValidator("json", createTaskComment),
+    async (c) => {
+      const databases = c.get("databases");
+      const user = c.get("user");
+      const { taskId } = c.req.param();
+      const comment = c.req.valid("json");
+
+      try {
+        const post = await databases.createDocument(
+          DATABASES_ID,
+          COMMENTS_ID,
+          ID.unique(),
+          {
+            taskId,
+            userId: user.$id,
+            userName: user.name || user.email,
+            text: comment.comment
+          }
+        );
+
+        return c.json({ success: true, data: post });
+      } catch (error) {
+        console.error("Error sending comment:", error);
+        return c.json({ error: "Failed to sending comment" }, 500);
+      }
     }
   );
 
