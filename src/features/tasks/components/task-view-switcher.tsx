@@ -104,7 +104,7 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) =
           <Separator />
         </div>
         <DataFilters hideProjectFilter={hideProjectFilter} />
-        <div className="px-2 my-3 h-0.5 bg-gray-200">
+        <div className="px-2 mt-3 h-0.5 bg-gray-200">
           <Separator />
         </div>
         {isLoadingTasks ? (

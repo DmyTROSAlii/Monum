@@ -22,6 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 interface DataTableProps<TData, TValue> {
@@ -55,8 +56,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      {/* This ih searching tasks */}
-      {/* <div className="flex items-center py-4">
+      <div className="flex items-center py-3">
         <Input
           placeholder="Filter tasks"
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
@@ -65,7 +65,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-      </div> */}
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
