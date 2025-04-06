@@ -48,7 +48,7 @@ export const TaskOverview = ({
             <TaskDate value={task.dueDate} className="text-sm font-medium" />
           </OverviewProperty>
           <OverviewProperty label="Status">
-            <Badge variant={task.status}>
+            <Badge variant={task.status} className="dark:text-zinc-800">
               {snakeCaseToTitleCase(task.status)}
             </Badge>
           </OverviewProperty>

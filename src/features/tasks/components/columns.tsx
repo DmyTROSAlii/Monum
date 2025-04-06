@@ -127,7 +127,7 @@ export const columns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       const status = row.original.status;
 
-      return <Badge variant={row.original.status}>{snakeCaseToTitleCase(status)}</Badge>
+      return <Badge className="dark:text-zinc-800" variant={row.original.status}>{snakeCaseToTitleCase(status)}</Badge>
     },
   },
   {
