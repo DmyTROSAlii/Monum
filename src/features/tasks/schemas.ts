@@ -13,5 +13,5 @@ export const createTaskSchema = z.object({
 });
 
 export const createTaskComment = z.object({
-  comment: z.string().min(1, "Required"),
+  text: z.string().min(1, "Required"),
 });

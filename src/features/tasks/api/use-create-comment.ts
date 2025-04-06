@@ -4,11 +4,11 @@ import { InferRequestType, InferResponseType } from "hono";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 type ResponseType = InferResponseType<
-  (typeof client.api.tasks)["tasks"][":taskId"]["comment"]["$post"],
+  (typeof client.api.tasks)["tasks"][":taskId"]["comments"]["$post"],
   200
 >;
 type RequestType = InferRequestType<
-  (typeof client.api.tasks)["tasks"][":taskId"]["comment"]["$post"]
+  (typeof client.api.tasks)["tasks"][":taskId"]["comments"]["$post"]
 >;
 
 export const useCreateComment = () => {
@@ -16,7 +16,7 @@ export const useCreateComment = () => {
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async ({ param, json }) => {
-      const response = await client.api.tasks["tasks"][":taskId"]["comment"]["$post"]({
+      const response = await client.api.tasks["tasks"][":taskId"]["comments"]["$post"]({
         param,
         json,
       });

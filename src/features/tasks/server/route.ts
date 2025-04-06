@@ -314,6 +314,7 @@ const app = new Hono()
         project,
         assignee,
         comments,
+        userId: currentUser.$id,
       },
     });
   })
@@ -385,7 +386,7 @@ const app = new Hono()
     }
   )
   .post(
-    "/tasks/:taskId/comment",
+    "/tasks/:taskId/comments",
     sessionMiddleware,
     zValidator("json", createTaskComment),
     async (c) => {
@@ -403,7 +404,7 @@ const app = new Hono()
             taskId,
             userId: user.$id,
             userName: user.name || user.email,
-            text: comment.comment
+            text: comment.text,
           }
         );
 
@@ -413,6 +414,26 @@ const app = new Hono()
         return c.json({ error: "Failed to sending comment" }, 500);
       }
     }
-  );
+  )
+  .delete("/:workspaceId/tasks/:taskId/comments/:commentId", sessionMiddleware, async (c) => {
+    const user = c.get("user");
+    const databases = c.get("databases");
+    const { workspaceId, taskId, commentId } = c.req.param();
+
+    const member = await getMember({
+      databases,
+      workspaceId: workspaceId,
+      userId: user.$id,
+    });
+
+    if (!member) {
+      return c.json({ error: "Unauthorized" }, 401);
+    }
+
+    await databases.deleteDocument(DATABASES_ID, COMMENTS_ID, commentId);
+
+    return c.json({ data: { $id: taskId } });
+  })
+
 
 export default app;

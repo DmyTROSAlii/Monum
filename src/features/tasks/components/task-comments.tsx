@@ -1,38 +1,46 @@
+import { z } from "zod";
+import { cn } from "@/lib/utils";
+import { MoreVertical, Send, Trash } from "lucide-react";
+
+import { useForm } from "react-hook-form";
 import { Separator } from "@radix-ui/react-dropdown-menu";
-
-import { Send } from "lucide-react"
-
-import { MemberAvatar } from "@/features/members/components/member-avatar";
-
-import { Button } from "@/components/ui/button";
 
 import { Comment } from "../types";
 import { createTaskComment } from "../schemas";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+
 import { useCreateComment } from "../api/use-create-comment";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+
+import { MemberAvatar } from "@/features/members/components/member-avatar";
+
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { useDeleteComment } from "../api/use-delete-comment";
 
 interface TaskCommentsProps {
   comments: Comment[];
   taskId: string;
+  userId: string;
+  workspaceId: string;
 };
 
 export const TaskComments = ({
   comments,
-  taskId
+  taskId,
+  userId,
+  workspaceId,
 }: TaskCommentsProps) => {
-  const { mutate, isPending } = useCreateComment();
+  const { mutate: createComment, isPending: isCreating } = useCreateComment();
+  const { mutate: deleteComment, isPending: isDeleting } = useDeleteComment();
 
   const form = useForm<z.infer<typeof createTaskComment>>({
     defaultValues: {
-      comment: "",
+      text: "",
     }
   });
 
   const onSubmit = (values: z.infer<typeof createTaskComment>) => {
-    mutate({
+    createComment({
       json: { ...values },
       param: { taskId }
     }, {
@@ -40,6 +48,12 @@ export const TaskComments = ({
         form.reset();
       }
     });
+  };
+
+  const handleDelete = (commentId: string) => {
+    deleteComment(
+      { param: { workspaceId, taskId, commentId } }
+    );
   };
 
   return (
@@ -52,17 +66,17 @@ export const TaskComments = ({
           <Separator />
         </div>
         <div className="bg-muted p-4 border-4 border-muted rounded-lg">
-          <ul className="flex flex-col gap-y-4 gap-x-2 w-full">
+          <ul className="flex flex-col gap-y-5 w-full">
             {(!comments.length ? <span className="m-auto text-muted-foreground">No comments yet</span>
               : comments.map((comment) => (
-                <li key={comment.$id} className="flex items-start gap-x-3">
+                <li key={comment.$id} className={cn("flex items-end gap-x-2.5", comment.userId === userId ? "flex-row-reverse" : "")}>
                   <MemberAvatar
                     name={comment.userName}
                     className="size-8 flex-shrink-0"
                   />
-                  <div className="flex flex-col gap-y-1 bg-white dark:bg-[#ffffff1a] p-4 rounded-lg shadow-sm w-full">
+                  <div className="group flex flex-col gap-y-1 bg-white dark:bg-[#ffffff1a] p-4 rounded-lg shadow-sm w-full">
                     <div className="flex items-center justify-between">
-                      <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                      <p className={cn("text-sm font-semibold text-neutral-900 dark:text-neutral-100", comment.userId === userId ? "text-blue-700 dark:text-blue-400" : "")}>
                         {comment.userName}
                       </p>
                       <span className="text-xs text-neutral-500 dark:text-neutral-400">
@@ -75,9 +89,21 @@ export const TaskComments = ({
                         }).format(new Date(comment.$updatedAt || comment.$createdAt))}
                       </span>
                     </div>
-                    <p className="text-sm text-neutral-700 dark:text-neutral-300">
-                      {comment.text}
-                    </p>
+                    <div className="flex items-end justify-between">
+                      <p className="text-sm text-neutral-700 dark:text-neutral-300 break-words break-all">
+                        {comment.text}
+                      </p>
+                      {(userId === comment.userId ?
+                        <Button
+                          variant="ghost"
+                          className="size-8 p-0 invisible group-hover:visible text-zinc-400 hover:text-red-600"
+                          onClick={() => handleDelete(comment.$id)}
+                          disabled={isDeleting}
+                        >
+                          <Trash className="size-4" />
+                        </Button>
+                        : "")}
+                    </div>
                   </div>
                 </li>
               )))}
@@ -90,7 +116,7 @@ export const TaskComments = ({
               <div className="flex justify-between gap-x-2">
                 <FormField
                   control={form.control}
-                  name="comment"
+                  name="text"
                   render={({ field }) => (
                     <FormItem className="flex-1">
                       <FormControl>
@@ -107,7 +133,7 @@ export const TaskComments = ({
                 <Button
                   type="submit"
                   size="lg"
-                  disabled={isPending}
+                  disabled={isCreating}
                   className="flex-shrink-0"
                 >
                   <Send className="dark:text-neutral-200" />

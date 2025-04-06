@@ -33,7 +33,7 @@ export const TaskIdClient = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <TaskOverview task={data} />
         <TaskDescription task={data} />
-        <TaskComments comments={data.comments.documents} taskId={taskId} />
+        <TaskComments comments={data.comments.documents} taskId={taskId} userId={data.userId} workspaceId={data.workspaceId} />
       </div>
     </div>
   );
