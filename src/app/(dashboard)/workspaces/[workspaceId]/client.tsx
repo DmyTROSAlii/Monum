@@ -5,7 +5,7 @@ import { formatDistanceToNow } from "date-fns";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { CalendarIcon, PlusIcon, SettingsIcon } from "lucide-react";
 
-import { Task } from "@/features/tasks/types";
+import { Task, TaskStatus } from "@/features/tasks/types";
 import { Member } from "@/features/members/types";
 import { Project } from "@/features/projects/types";
 import { useGetTasks } from "@/features/tasks/api/use-get-tasks";
@@ -42,11 +42,13 @@ export const WorkspaceIdClient = () => {
     return <PageError message="Failed to load workspace data" />
   }
 
+  const assignedTasks = tasks.documents.filter((task) => task.status === TaskStatus.TODO || task.status === TaskStatus.IN_PROGRESS);
+
   return (
     <div className="h-full flex flex-col space-y-4">
       <Analytics data={analytics} />
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-        <TasksList data={tasks.documents} total={tasks.total} />
+        <TasksList data={assignedTasks} total={assignedTasks.length} />
         <ProjectsList data={projects.documents} total={projects.total} />
         <MembersList data={members.documents} total={members.total} />
       </div>
@@ -56,7 +58,7 @@ export const WorkspaceIdClient = () => {
 
 interface TasksListProps {
   data: Task[];
-  total: number
+  total: number;
 };
 
 export const TasksList = ({ data, total }: TasksListProps) => {
