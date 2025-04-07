@@ -11,6 +11,7 @@ import { useCreateTaskModal } from "../hooks/use-create-task-modal";
 
 interface CreateTaskFormWrapperProps {
   onCancel: () => void;
+  status: string;
 }
 
 export const CreateTaskFormWrapper = ({
