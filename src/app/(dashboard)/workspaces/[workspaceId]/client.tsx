@@ -1,5 +1,7 @@
 "use client";
 
+import { cn } from "@/lib/utils";
+
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import { Separator } from "@radix-ui/react-dropdown-menu";
@@ -141,7 +143,7 @@ export const ProjectsList = ({ data, total }: ProjectsListProps) => {
           <div className="px-2 mx-8 my-4 w-full h-0.5 bg-gray-200">
             <Separator />
           </div>
-          <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
+          <ul className={cn("grid grid-cols-1 lg:grid-cols-2 gap-4 w-full", total > 0 ? "" : "lg:grid-cols-1")}>
             {data.map((project) => (
               <li key={project.$id}>
                 <Link href={`/workspaces/${workspaceId}/projects/${project.$id}`}>
