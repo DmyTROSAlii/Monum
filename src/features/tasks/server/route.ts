@@ -19,6 +19,7 @@ import { sessionMiddleware } from "@/lib/session-middleware";
 import { Comment, Task, TaskStatus } from "../types";
 import { createTaskComment, createTaskSchema } from "../schemas";
 import { comment } from "postcss";
+import { cascadeDelete } from "@/lib/utils";
 
 const app = new Hono()
   .delete("/:taskId", sessionMiddleware, async (c) => {
@@ -42,7 +43,13 @@ const app = new Hono()
       return c.json({ error: "Unauthorized" }, 401);
     }
 
-    await databases.deleteDocument(DATABASES_ID, TASKS_ID, taskId);
+    await cascadeDelete(
+      databases,
+      DATABASES_ID,
+      TASKS_ID,
+      [Query.equal("$id", taskId)],
+      [{ collectionId: COMMENTS_ID, foreignKey: "taskId" }]
+    );
 
     return c.json({ data: { $id: task.$id } });
   })
@@ -416,25 +423,28 @@ const app = new Hono()
       }
     }
   )
-  .delete("/:workspaceId/tasks/:taskId/comments/:commentId", sessionMiddleware, async (c) => {
-    const user = c.get("user");
-    const databases = c.get("databases");
-    const { workspaceId, taskId, commentId } = c.req.param();
+  .delete(
+    "/:workspaceId/tasks/:taskId/comments/:commentId",
+    sessionMiddleware,
+    async (c) => {
+      const user = c.get("user");
+      const databases = c.get("databases");
+      const { workspaceId, taskId, commentId } = c.req.param();
 
-    const member = await getMember({
-      databases,
-      workspaceId: workspaceId,
-      userId: user.$id,
-    });
+      const member = await getMember({
+        databases,
+        workspaceId: workspaceId,
+        userId: user.$id,
+      });
 
-    if (!member) {
-      return c.json({ error: "Unauthorized" }, 401);
+      if (!member) {
+        return c.json({ error: "Unauthorized" }, 401);
+      }
+
+      await databases.deleteDocument(DATABASES_ID, COMMENTS_ID, commentId);
+
+      return c.json({ data: { $id: taskId } });
     }
-
-    await databases.deleteDocument(DATABASES_ID, COMMENTS_ID, commentId);
-
-    return c.json({ data: { $id: taskId } });
-  })
-
+  );
 
 export default app;

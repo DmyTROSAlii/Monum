@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { Hono } from "hono";
-import { ID, Query } from "node-appwrite";
+import { ID, Models, Query } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
 import { endOfMonth, startOfMonth, subMonths } from "date-fns";
 
@@ -9,6 +9,7 @@ import { getMember } from "@/features/members/utils";
 
 import { sessionMiddleware } from "@/lib/session-middleware";
 import {
+  COMMENTS_ID,
   DATABASES_ID,
   IMAGES_BUCKET_ID,
   PROJECTS_ID,
@@ -17,6 +18,7 @@ import {
 
 import { Project } from "../types";
 import { createProjectSchema, updateProjectSchema } from "../schemas";
+import { cascadeDelete } from "@/lib/utils";
 
 const app = new Hono()
   .post(
@@ -194,7 +196,6 @@ const app = new Hono()
   .delete("/:projectId", sessionMiddleware, async (c) => {
     const databases = c.get("databases");
     const user = c.get("user");
-
     const { projectId } = c.req.param();
 
     const existingProject = await databases.getDocument<Project>(
@@ -213,7 +214,23 @@ const app = new Hono()
       return c.json({ error: "Unauthorized" }, 401);
     }
 
-    await databases.deleteDocument(DATABASES_ID, PROJECTS_ID, projectId);
+    const tasks = await databases.listDocuments(DATABASES_ID, TASKS_ID, [
+      Query.equal("projectId", projectId),
+    ]);
+
+    for (const task of tasks.documents) {
+      await cascadeDelete(databases, DATABASES_ID, COMMENTS_ID, [
+        Query.equal("taskId", task.$id),
+      ]);
+    }
+
+    await cascadeDelete(
+      databases,
+      DATABASES_ID,
+      PROJECTS_ID,
+      [Query.equal("$id", projectId)],
+      [{ collectionId: TASKS_ID, foreignKey: "projectId" }]
+    );
 
     return c.json({ data: { $id: projectId } });
   })

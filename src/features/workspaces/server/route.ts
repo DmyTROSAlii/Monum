@@ -8,12 +8,14 @@ import { TaskStatus } from "@/features/tasks/types";
 import { getMember } from "@/features/members/utils";
 import { MemberRole } from "@/features/members/types";
 
-import { generateInviteCode } from "@/lib/utils";
+import { cascadeDelete, generateInviteCode } from "@/lib/utils";
 import { sessionMiddleware } from "@/lib/session-middleware";
 import {
+  COMMENTS_ID,
   DATABASES_ID,
   IMAGES_BUCKET_ID,
   MEMBERS_ID,
+  PROJECTS_ID,
   TASKS_ID,
   WORKSPACES_ID,
 } from "@/config";
@@ -373,7 +375,18 @@ const app = new Hono()
       return c.json({ error: "Unauthorized" }, 401);
     }
 
-    await databases.deleteDocument(DATABASES_ID, WORKSPACES_ID, workspaceId);
+    await cascadeDelete(
+      databases,
+      DATABASES_ID,
+      WORKSPACES_ID,
+      [Query.equal("$id", workspaceId)],
+      [
+        { collectionId: MEMBERS_ID, foreignKey: "workspaceId" },
+        { collectionId: PROJECTS_ID, foreignKey: "workspaceId" },
+        { collectionId: TASKS_ID, foreignKey: "workspaceId" },
+        { collectionId: COMMENTS_ID, foreignKey: "workspaceId" },
+      ]
+    );
 
     return c.json({ data: { $id: workspaceId } });
   })
