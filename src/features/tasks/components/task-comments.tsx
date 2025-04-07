@@ -42,7 +42,7 @@ export const TaskComments = ({
   const onSubmit = (values: z.infer<typeof createTaskComment>) => {
     createComment({
       json: { ...values },
-      param: { taskId }
+      param: { workspaceId, taskId }
     }, {
       onSuccess: () => {
         form.reset();
