@@ -11,7 +11,7 @@ export const CreateTaskModal = () => {
 
   return (
     <ResponsiveModal open={isOpen} onOpenChange={setIsOpen}>
-      <CreateTaskFormWrapper onCancel={close} status={status} />
+      <CreateTaskFormWrapper onCancel={close} status={status || "BACKLOG"} />
     </ResponsiveModal>
   );
 };
