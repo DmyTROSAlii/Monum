@@ -386,13 +386,13 @@ const app = new Hono()
     }
   )
   .post(
-    "/tasks/:taskId/comments",
+    "/:workspaceId/tasks/:taskId/comments",
     sessionMiddleware,
     zValidator("json", createTaskComment),
     async (c) => {
       const databases = c.get("databases");
       const user = c.get("user");
-      const { taskId } = c.req.param();
+      const { workspaceId, taskId } = c.req.param();
       const comment = c.req.valid("json");
 
       try {
@@ -401,6 +401,7 @@ const app = new Hono()
           COMMENTS_ID,
           ID.unique(),
           {
+            workspaceId,
             taskId,
             userId: user.$id,
             userName: user.name || user.email,

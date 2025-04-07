@@ -20,6 +20,7 @@ export type Task = Models.Document & {
 };
 
 export type Comment = Models.Document & {
+  workspaceId: string;
   taskId: string;
   userId: string;
   userName: string;
