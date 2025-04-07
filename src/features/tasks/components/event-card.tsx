@@ -57,7 +57,7 @@ export const EventCard = ({
 
     const timeout = setTimeout(() => {
       setHoveredTask(taskId);
-      setModalPosition({ x: clientX + 5, y: clientY + 5 });
+      setModalPosition({ x: clientX, y: clientY });
     }, 500);
 
     setHoverTimeout(timeout);
