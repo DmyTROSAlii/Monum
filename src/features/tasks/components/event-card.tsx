@@ -3,7 +3,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
-import { Task, TaskStatus } from "../types";
+import { TaskStatus } from "../types";
 
 import { TaskDetailsModal } from "./task-overview-modal";
 
