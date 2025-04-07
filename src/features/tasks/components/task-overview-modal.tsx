@@ -1,17 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Separator } from "@radix-ui/react-dropdown-menu";
+
+import { TaskDate } from "./task-date";
+import { OverviewProperty } from "./overview-property";
 
 import { useGetTask } from "../api/use-get-task";
 
+import { snakeCaseToTitleCase } from "@/lib/utils";
+
+import { Badge } from "@/components/ui/badge";
 import { PageError } from "@/components/page-error";
 import { PageLoader } from "@/components/page-loader";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@radix-ui/react-dropdown-menu";
-import { OverviewProperty } from "./overview-property";
-import { MemberAvatar } from "@/features/members/components/member-avatar";
-import { TaskDate } from "./task-date";
-import { Badge } from "@/components/ui/badge";
-import { snakeCaseToTitleCase } from "@/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface TaskDetailsModalProps {
   taskId: string;

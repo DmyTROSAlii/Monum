@@ -2,8 +2,6 @@ import { Loader } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 
-import { TaskStatus } from "../types";
-
 import { CreateTaskForm } from "./create-task-form";
 
 import { useGetMembers } from "@/features/members/api/use-get-members";

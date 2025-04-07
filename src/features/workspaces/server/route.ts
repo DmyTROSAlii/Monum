@@ -8,8 +8,8 @@ import { TaskStatus } from "@/features/tasks/types";
 import { getMember } from "@/features/members/utils";
 import { MemberRole } from "@/features/members/types";
 
-import { cascadeDelete, generateInviteCode } from "@/lib/utils";
 import { sessionMiddleware } from "@/lib/session-middleware";
+import { cascadeDelete, generateInviteCode } from "@/lib/utils";
 import {
   COMMENTS_ID,
   DATABASES_ID,

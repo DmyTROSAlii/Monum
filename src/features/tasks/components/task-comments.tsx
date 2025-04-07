@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { cn } from "@/lib/utils";
-import { MoreVertical, Send, Trash } from "lucide-react";
+import { Send, Trash } from "lucide-react";
 
 import { useForm } from "react-hook-form";
 import { Separator } from "@radix-ui/react-dropdown-menu";
