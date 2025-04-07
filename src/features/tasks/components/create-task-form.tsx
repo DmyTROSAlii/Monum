@@ -37,6 +37,7 @@ export const CreateTaskForm = ({ onCancel, status, projectOpions, memberOpions }
   const form = useForm<z.infer<typeof createTaskSchema>>({
     resolver: zodResolver(createTaskSchema.omit({ workspaceId: true })),
     defaultValues: {
+      name: "",
       projectId: projectId,
       workspaceId,
       status: Object.values(TaskStatus).includes(status as TaskStatus) ? (status as TaskStatus) : undefined,
