@@ -105,7 +105,7 @@ export const SignUpCard = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button disabled={isPending} size="lg" className="w-full dark:text-neutral-200">
+                        <Button disabled={isPending} size="lg" className="w-full dark:text-zinc-200">
                             Register
                         </Button>
                     </form>

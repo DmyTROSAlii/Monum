@@ -74,7 +74,7 @@ export const TasksList = ({ data, total }: TasksListProps) => {
               Assigned Tasks ({total})
             </p>
             <Button variant="muted" size="icon" onClick={() => createTask()}>
-              <PlusIcon className="size-4 text-neutral-400 dark:text-neutral-800" />
+              <PlusIcon className="size-4 text-neutral-400 dark:text-zinc-800" />
             </Button>
           </div>
           <div className="px-2 mx-8 my-4 w-full h-0.5 bg-gray-200">

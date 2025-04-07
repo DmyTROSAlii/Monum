@@ -130,7 +130,7 @@ export const ProfileCard = ({ onCancel, initialValues }: ProfileCardProps) => {
                   type="submit"
                   size="lg"
                   disabled={isPending}
-                  className="dark:text-neutral-200"
+                  className="dark:text-zinc-200"
                 >
                   Save changes
                 </Button>
@@ -202,7 +202,7 @@ export const ProfileCard = ({ onCancel, initialValues }: ProfileCardProps) => {
                   type="submit"
                   size="lg"
                   disabled={isPending}
-                  className="dark:text-neutral-200"
+                  className="dark:text-zinc-200"
                 >
                   Save email
                 </Button>

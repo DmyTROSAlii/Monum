@@ -92,7 +92,7 @@ export const EventCard = ({
       <div
         onClick={onClick}
         className={cn(
-          "p-1.5 text-xs bg-white dark:bg-neutral-600 text-primary border rounded-md border-l-4 flex flex-col gap-y-1.5 hover:opacity-75 transition",
+          "p-1.5 text-xs bg-white dark:bg-zinc-600 text-primary border rounded-md border-l-4 flex flex-col gap-y-1.5 hover:opacity-75 transition",
           statusColorMap[status],
           hoveredTask ?? "hover:cursor-wait"
         )}
@@ -103,7 +103,7 @@ export const EventCard = ({
         <div className="flex items-center gap-x-1">
           <MemberAvatar
             name={assignee?.name}
-            fallbackClassName="dark:bg-neutral-200"
+            fallbackClassName="dark:bg-zinc-200"
           />
           <div className="size-1 rounded-full bg-neutral-300" />
           <ProjectAvatar

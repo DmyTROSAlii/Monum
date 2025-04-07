@@ -76,10 +76,10 @@ export const TaskComments = ({
                   />
                   <div className="group flex flex-col gap-y-1 bg-white dark:bg-[#ffffff1a] p-4 rounded-lg shadow-sm w-full">
                     <div className="flex items-center justify-between">
-                      <p className={cn("text-sm font-semibold text-neutral-900 dark:text-neutral-100", comment.userId === userId ? "text-blue-700 dark:text-blue-400" : "")}>
+                      <p className={cn("text-sm font-semibold text-neutral-900 dark:text-zinc-100", comment.userId === userId ? "text-blue-700 dark:text-blue-400" : "")}>
                         {comment.userName}
                       </p>
-                      <span className="text-xs text-neutral-500 dark:text-neutral-400">
+                      <span className="text-xs text-neutral-500 dark:text-zinc-400">
                         {new Intl.DateTimeFormat("en-US", {
                           year: "numeric",
                           month: "short",
@@ -90,7 +90,7 @@ export const TaskComments = ({
                       </span>
                     </div>
                     <div className="flex items-end justify-between">
-                      <p className="text-sm text-neutral-700 dark:text-neutral-300 break-words break-all">
+                      <p className="text-sm text-neutral-700 dark:text-zinc-300 break-words break-all">
                         {comment.text}
                       </p>
                       {(userId === comment.userId ?
@@ -136,7 +136,7 @@ export const TaskComments = ({
                   disabled={isCreating}
                   className="flex-shrink-0"
                 >
-                  <Send className="dark:text-neutral-200" />
+                  <Send className="dark:text-zinc-200" />
                 </Button>
               </div>
             </form>

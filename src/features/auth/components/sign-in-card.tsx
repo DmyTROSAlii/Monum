@@ -79,7 +79,7 @@ export const SignInCard = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button disabled={isPending} size="lg" className="w-full dark:text-neutral-200">
+                        <Button disabled={isPending} size="lg" className="w-full dark:text-zinc-200">
                             Login
                         </Button>
                     </form>

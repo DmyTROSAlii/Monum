@@ -50,7 +50,7 @@ const CustomToolbar = ({ date, onNavigate }: CustomToolbarProps) => {
         className="dark:bg-transparent"
         size="icon"
       >
-        <ChevronLeftIcon className="size-4 dark:text-neutral-200" />
+        <ChevronLeftIcon className="size-4 dark:text-zinc-200" />
       </Button>
       <div className="flex items-center border border-input rounded-md px-3 py-2 h-8 justify-center w-full lg:w-auto">
         <CalendarIcon className="size-4 mr-2" />
@@ -62,7 +62,7 @@ const CustomToolbar = ({ date, onNavigate }: CustomToolbarProps) => {
         className="dark:bg-transparent"
         size="icon"
       >
-        <ChevronRightIcon className="size-4 dark:text-neutral-200" />
+        <ChevronRightIcon className="size-4 dark:text-zinc-200" />
       </Button>
     </div>
   )
