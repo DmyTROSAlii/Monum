@@ -186,7 +186,7 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
                               disabled={isPending}
                               variant="teritary"
                               size="xs"
-                              className="w-fit mt-2"
+                              className="w-fit mt-2 dark:text-zinc-800"
                               onClick={() => inputRef.current?.click()}
                             >
                               Upload Image

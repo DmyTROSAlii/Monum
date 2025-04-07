@@ -67,17 +67,6 @@ export const UserButton = () => {
                 <div className="px-7 h-0.5 bg-gray-200">
                     <Separator />
                 </div>
-                <DropdownMenuItem className="h-10 flex justify-center items-center cursor-pointer">
-                    <Link key="Profile Settings" href={`/profile/${user.$id}`}>
-                        <div className="flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-neutral-500">
-                            <SettingsIcon className="size-5 text-neutral-500" />
-                            Settings
-                        </div>
-                    </Link>
-                </DropdownMenuItem>
-                <div className="px-7 h-0.5 bg-gray-200">
-                    <Separator />
-                </div>
                 <DropdownMenuItem
                     className="h-10 flex justify-center items-center cursor-pointer"
                     onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
@@ -90,6 +79,17 @@ export const UserButton = () => {
                         )}
                         Theme Mode
                     </div>
+                </DropdownMenuItem>
+                <div className="px-7 h-0.5 bg-gray-200">
+                    <Separator />
+                </div>
+                <DropdownMenuItem className="h-10 flex justify-center items-center cursor-pointer">
+                    <Link key="Profile Settings" href={`/profile/${user.$id}`}>
+                        <div className="flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-neutral-500">
+                            <SettingsIcon className="size-5 text-neutral-500" />
+                            Settings
+                        </div>
+                    </Link>
                 </DropdownMenuItem>
                 <div className="px-7 h-0.5 bg-gray-200">
                     <Separator />
