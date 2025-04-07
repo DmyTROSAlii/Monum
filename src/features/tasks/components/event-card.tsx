@@ -3,7 +3,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
-import { TaskStatus } from "../types";
+import { Task, TaskStatus } from "../types";
 
 import { TaskDetailsModal } from "./task-overview-modal";
 
@@ -47,12 +47,12 @@ export const EventCard = ({
     router.push(`/workspaces/${workspaceId}/tasks/${id}`);
   };
 
-  const [hoveredTask, setHoveredTask] = useState<any | null>(null);
+  const [hoveredTask, setHoveredTask] = useState<string>("");
   const [modalPosition, setModalPosition] = useState<{ x: number; y: number } | null>(null);
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
-  const [isModalHovered, setIsModalHovered] = useState(false); // Стан для відстеження наведення на модальне вікно
+  const [isModalHovered, setIsModalHovered] = useState(false);
 
-  const handleMouseEnter = (taskId: any, event: React.MouseEvent) => {
+  const handleMouseEnter = (taskId: string, event: React.MouseEvent) => {
     const { clientX, clientY } = event;
 
     const timeout = setTimeout(() => {
@@ -72,7 +72,7 @@ export const EventCard = ({
     }
 
     if (!isModalHovered) {
-      setHoveredTask(null);
+      setHoveredTask("");
       setModalPosition(null);
     }
   };
@@ -83,7 +83,7 @@ export const EventCard = ({
 
   const handleModalMouseLeave = () => {
     setIsModalHovered(false);
-    setHoveredTask(null);
+    setHoveredTask("");
     setModalPosition(null);
   };
 
