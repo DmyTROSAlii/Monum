@@ -19,7 +19,8 @@ import { sessionMiddleware } from "@/lib/session-middleware";
 
 import { Comment, Task, TaskStatus } from "../types";
 import { createTaskComment, createTaskSchema } from "../schemas";
-
+import { use } from "react";
+import { useNotificateEmail } from "../hooks/use-notificate-email";
 
 const app = new Hono()
   .delete("/:taskId", sessionMiddleware, async (c) => {
@@ -132,7 +133,6 @@ const app = new Hono()
       );
 
       const assignees = await Promise.all(
-        // members.documents.map(async (map) => {
         members.documents.map(async (member) => {
           const user = await users.get(member.userId);
 
@@ -218,6 +218,8 @@ const app = new Hono()
           position: newPosition,
         }
       );
+
+      useNotificateEmail({userId: assigneeId, subject: "New task assigned", text: `You have a new task assigned to you: ${task.name}`});
 
       return c.json({ data: task });
     }
