@@ -1,5 +1,5 @@
-import { EMAIL_PASS, EMAIL_USER } from "@/config";
-import { createAdminClient } from "@/lib/appwrite";
+// import { EMAIL_PASS, EMAIL_USER } from "@/config";
+// import { createAdminClient } from "@/lib/appwrite";
 
 import nodemailer from "nodemailer";
 
@@ -26,6 +26,7 @@ export const useNotificateEmail = async ({ userId, subject, text}: EmailProps) =
 
   try {
     console.log("Sending email to user...");
+    console.log("userId", userId);
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
