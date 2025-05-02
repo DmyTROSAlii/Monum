@@ -27,6 +27,7 @@ export const useNotificateEmail = async ({ userId, subject, text}: EmailProps) =
   try {
     console.log("Sending email to user...");
     console.log("email", email);
+    console.log("userId", userId);
     await transporter.sendMail({
       from: EMAIL_USER,
       to: email,
@@ -38,4 +39,6 @@ export const useNotificateEmail = async ({ userId, subject, text}: EmailProps) =
     console.error("Error sending email:", error);
     return { error };
   }
+
+  return userId;
 };

@@ -218,7 +218,7 @@ const app = new Hono()
         }
       );
 
-      useNotificateEmail({userId: assigneeId, subject: "New task assigned", text: `You have a new task assigned to you: ${task.name}`});
+      console.log(useNotificateEmail({userId: assigneeId, subject: "New task assigned", text: `You have a new task assigned to you: ${task.name}`}));
 
       return c.json({ data: task });
     }
