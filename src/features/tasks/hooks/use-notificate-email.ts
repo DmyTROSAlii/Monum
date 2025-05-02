@@ -31,7 +31,7 @@ export const useNotificateEmail = async ({
     user = await users.get(userId);
   } catch (error) {
     console.error(`User with ID ${userId} not found.`);
-    return { error: "User not found" };
+    return { error: error };
   }
 
   const email = user.email;
