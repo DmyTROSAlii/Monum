@@ -5,87 +5,53 @@ export const generateEmailTemplate = (
   firstParagraph: string
 ) => `
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }
-    .email-container {
-      max-width: 600px;
-      margin: 20px auto;
-      background-color: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
-    .email-header {
-      background-color: #4caf50;
-      color: #ffffff;
-      text-align: center;
-      padding: 20px;
-      font-size: 24px;
-    }
-    .email-body {
-      padding: 20px;
-      color: #333333;
-      line-height: 1.6;
-    }
-    .email-footer {
-      text-align: center;
-      padding: 10px;
-      font-size: 12px;
-      color: #777777;
-      background-color: #f4f4f4;
-    }
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      margin: 20px 0;
-      background-color: #4caf50;
-      color: #ffffff;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-    .button:hover {
-      background-color: #45a049;
-    }
-    @media (max-width: 600px) {
-      .email-container {
-      width: 100%;
-      margin: 0;
-      border-radius: 0;
-    }
-    .email-header {
-      font-size: 20px;
-    }
-    .button {
-      font-size: 14px;
-      padding: 8px 16px;
-    }
-  }
-  </style>
+  <meta charset="UTF-8">
+  <title>${subject}</title>
 </head>
-<body>
-  <div class="email-container">
-    <div class="email-header">
-      ${subject}
-    </div>
-    <div class="email-body">
-      <p>Hello,</p>
-      <p>${firstParagraph}<strong>${taskName}</strong>.</p>
-      <p>Click the button below to view the task:</p>
-      <a href="${taskLink}" class="button">View Task</a>
-      <p>Thank you,<br>The Monum Team</p>
-    </div>
-    <div class="email-footer">
-      &copy; 2025 Monum. All rights reserved.
-    </div>
-  </div>
+<body style="margin:0; padding:0; background-color:#eeeeee;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="font-family:Arial, sans-serif;">
+    <tr>
+      <td align="center" style="padding:20px 0;">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+          <!-- Header -->
+          <tr>
+            <td style="background-color:#4caf50; color:#ffffff; text-align:center; padding:24px; font-size:26px; font-weight:bold;">
+              📌 ${subject}
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:24px; color:#333333; font-size:16px; line-height:1.6;">
+              <p style="margin-top:0;">Hi there,</p>
+              <p>${firstParagraph}<strong>${taskName}</strong>.</p>
+              <p>To view the task, click the button below:</p>
+              <p style="text-align:center; margin:30px 0;">
+                <a href="${taskLink}" style="
+                  background-color:#4caf50;
+                  color:#ffffff;
+                  padding:12px 24px;
+                  text-decoration:none;
+                  font-size:16px;
+                  border-radius:6px;
+                  display:inline-block;
+                  font-weight:bold;
+                ">🔍 View Task</a>
+              </p>
+              <p>Thank you,<br>The <strong>Monum</strong> Team</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="background-color:#f4f4f4; text-align:center; padding:16px; font-size:12px; color:#888888;">
+              &copy; 2025 Monum. All rights reserved.
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
 `;
