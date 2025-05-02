@@ -1,5 +1,6 @@
 import { EMAIL_PASS, EMAIL_USER } from "@/config";
 import { createAdminClient } from "@/lib/appwrite";
+import { generateEmailTemplate } from "@/lib/generateEmailTemplate";
 
 import nodemailer from "nodemailer";
 

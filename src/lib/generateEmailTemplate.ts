@@ -1,4 +1,4 @@
-const generateEmailTemplate = (
+export const generateEmailTemplate = (
   subject: string,
   taskName: string,
   taskLink: string,
