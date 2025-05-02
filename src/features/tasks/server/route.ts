@@ -217,6 +217,7 @@ const app = new Hono()
           position: newPosition,
         }
       );
+      console.log("Task created:", task);
 
       useNotificateEmail({userId: assigneeId, subject: "New task assigned", text: `You have a new task assigned to you: ${task.name}`});
 
