@@ -21,13 +21,26 @@ interface EmailProps {
 
 export const useNotificateEmail = async ({ userId, subject, text}: EmailProps) => {
   const { users } = await createAdminClient();
-  const user = await users.get(userId);
+
+  let user;
+  try {
+    user = await users.get(userId);
+  } catch (error: any) {
+    if (error.code === 404) {
+      console.error(`User with ID ${userId} not found.`);
+      return { error: "User not found" };
+    }
+    throw error;
+  }
+
   const email = user.email;
+  if (!email) {
+    console.error(`User with ID ${userId} does not have an email.`);
+    return { error: "User does not have an email" };
+  }
 
   try {
     console.log("Sending email to user...");
-    console.log("email", email);
-    console.log("userId", userId);
     await transporter.sendMail({
       from: EMAIL_USER,
       to: email,
