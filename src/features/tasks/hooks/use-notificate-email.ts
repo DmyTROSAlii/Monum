@@ -25,34 +25,17 @@ export const useNotificateEmail = async ({
   text,
 }: EmailProps) => {
   const { users } = await createAdminClient();
-
-  let user;
-  try {
-    user = await users.get(userId);
-  } catch (error) {
-    console.error(`User with ID ${userId} not found.`);
-    return { error: error };
-  }
-
+  const user = await users.get(userId);
   const email = user.email;
-  if (!email) {
-    console.error(`User with ID ${userId} does not have an email.`);
-    return { error: "User does not have an email" };
-  }
 
   try {
-    console.log("Sending email to user...");
     await transporter.sendMail({
       from: EMAIL_USER,
       to: email,
       subject,
       text,
     });
-    console.log("Email sent successfully!");
   } catch (error) {
-    console.error("Error sending email:", error);
     return { error };
   }
-
-  return userId;
 };

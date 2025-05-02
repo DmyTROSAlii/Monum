@@ -217,7 +217,6 @@ const app = new Hono()
           position: newPosition,
         }
       );
-      console.log("Task created:", task);
 
       const assigneeUser = await databases.getDocument(
         DATABASES_ID,
