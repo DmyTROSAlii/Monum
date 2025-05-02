@@ -46,11 +46,11 @@ export const JoinWorkspaceForm = ({
           </CardDescription>
         </CardHeader>
         <div className="px-7">
-          <div className="my-8 h-0.5 bg-gray-200">
+          <div className="h-0.5 bg-gray-200">
             <Separator />
           </div>
           <CardContent className="p-7">
-            <div className="flex flex-col lg:flex-row gap-2 items-center justify-between">
+            <div className="flex flex-row lg:flex-row gap-2 items-center justify-between">
               <Button
                 variant="secondary"
                 type="button"
