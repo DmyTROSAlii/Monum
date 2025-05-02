@@ -108,7 +108,7 @@ export const TasksList = ({ data, total }: TasksListProps) => {
               No task found
             </li>
           </ul>
-          <Button variant="muted" className="mt-4 w-full dark:hover:text-neutral-500" asChild>
+          <Button variant="muted" className="mt-4 w-full dark:text-neutral-600 dark:hover:text-neutral-200" asChild>
             <Link href={`/workspaces/${workspaceId}/tasks`}>
               Show all
             </Link>
