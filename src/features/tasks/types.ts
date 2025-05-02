@@ -26,3 +26,4 @@ export type Comment = Models.Document & {
   userName: string;
   comment: string;
 };
+

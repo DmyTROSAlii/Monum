@@ -224,7 +224,14 @@ const app = new Hono()
         assigneeId
       );
 
-      useNotificateEmail({userId: assigneeUser.userId, subject: "New task assigned", text: `You have a new task assigned to you: ${task.name}`});
+      useNotificateEmail({
+        userId: assigneeUser.userId,
+        taskId: task.$id,
+        workspaceId: task.workspaceId,
+        subject: "New task assigned",
+        taskName: task.name,
+        firstParagraph: `You have a new task assigned to you: `,
+      });
 
       return c.json({ data: task });
     }

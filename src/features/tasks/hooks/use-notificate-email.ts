@@ -15,14 +15,20 @@ const transporter = nodemailer.createTransport({
 
 interface EmailProps {
   userId: string;
+  taskId: string;
+  workspaceId: string;
   subject: string;
-  text: string;
+  taskName: string;
+  firstParagraph: string;
 }
 
 export const useNotificateEmail = async ({
   userId,
+  taskId,
+  workspaceId,
   subject,
-  text,
+  taskName,
+  firstParagraph,
 }: EmailProps) => {
   const { users } = await createAdminClient();
   const user = await users.get(userId);
@@ -33,7 +39,8 @@ export const useNotificateEmail = async ({
       from: EMAIL_USER,
       to: email,
       subject,
-      text,
+      text: `You have been assigned a new task: ${taskName}. View it here: https://monum.online/workspaces/${workspaceId}/tasks/${taskId}`,
+      html: generateEmailTemplate(subject, taskName, `https://monum.online/workspaces/${workspaceId}/tasks/${taskId}`, firstParagraph),
     });
   } catch (error) {
     return { error };
