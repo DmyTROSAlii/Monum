@@ -278,6 +278,21 @@ const app = new Hono()
         }
       );
 
+      const assigneeUser = await databases.getDocument(
+        DATABASES_ID,
+        MEMBERS_ID,
+        assigneeId ?? existingTask.assigneeId
+      );
+
+      useNotificateEmail({
+        userId: assigneeUser.userId,
+        taskId: task.$id,
+        workspaceId: task.workspaceId,
+        subject: "Task updated",
+        taskName: task.name,
+        firstParagraph: `The task has been updated: `,
+      });
+
       return c.json({ data: task });
     }
   )
@@ -416,25 +431,51 @@ const app = new Hono()
       const { workspaceId, taskId } = c.req.param();
       const comment = c.req.valid("json");
 
-      try {
-        const post = await databases.createDocument(
-          DATABASES_ID,
-          COMMENTS_ID,
-          ID.unique(),
-          {
-            workspaceId,
-            taskId,
-            userId: user.$id,
-            userName: user.name || user.email,
-            text: comment.text,
-          }
-        );
+      const member = await getMember({
+        databases,
+        workspaceId,
+        userId: user.$id,
+      });
 
-        return c.json({ success: true, data: post });
-      } catch (error) {
-        console.error("Error sending comment:", error);
-        return c.json({ error: "Failed to sending comment" }, 500);
+      if (!member) {
+        return c.json({ error: "Unauthorized" }, 401);
       }
+
+      const post = await databases.createDocument(
+        DATABASES_ID,
+        COMMENTS_ID,
+        ID.unique(),
+        {
+          workspaceId,
+          taskId,
+          userId: user.$id,
+          userName: user.name || user.email,
+          text: comment.text,
+        }
+      );
+
+      const { name, assigneeId } = await databases.getDocument<Task>(
+        DATABASES_ID,
+        TASKS_ID,
+        taskId
+      );
+
+      const assigneeUser = await databases.getDocument(
+        DATABASES_ID,
+        MEMBERS_ID,
+        assigneeId
+      );
+
+      useNotificateEmail({
+        userId: assigneeUser.userId,
+        taskId: taskId,
+        workspaceId: workspaceId,
+        subject: "New comment on your task",
+        taskName: name,
+        firstParagraph: `A new comment has been added to your task: `,
+      });
+
+      return c.json({ success: true, data: post });
     }
   )
   .delete(

@@ -15,9 +15,9 @@ export const generateEmailTemplate = (
     <tr>
       <td align="center" style="padding:20px 0;">
         <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-          <!-- Header -->
+
           <tr>
-            <td style="background-color:#4caf50; color:#ffffff; text-align:center; padding:24px; font-size:26px; font-weight:bold;">
+            <td style="background-color:#68aedb; color:#ffffff; text-align:center; padding:24px; font-size:26px; font-weight:bold;">
               📌 ${subject}
             </td>
           </tr>
@@ -29,7 +29,7 @@ export const generateEmailTemplate = (
               <p>To view the task, click the button below:</p>
               <p style="text-align:center; margin:30px 0;">
                 <a href="${taskLink}" style="
-                  background-color:#4caf50;
+                  background-color:#68aedb;
                   color:#ffffff;
                   padding:12px 24px;
                   text-decoration:none;
