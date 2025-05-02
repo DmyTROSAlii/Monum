@@ -1,15 +1,15 @@
-// import { EMAIL_PASS, EMAIL_USER } from "@/config";
-// import { createAdminClient } from "@/lib/appwrite";
+import { EMAIL_PASS, EMAIL_USER } from "@/config";
+import { createAdminClient } from "@/lib/appwrite";
 
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 587, // Замість 465
-  secure: false, // важливо! 465 = secure: true, 587 = secure: false
+  port: 587,
+  secure: false,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: EMAIL_USER,
+    pass: EMAIL_PASS,
   },
 });
 
@@ -20,16 +20,16 @@ interface EmailProps {
 }
 
 export const useNotificateEmail = async ({ userId, subject, text}: EmailProps) => {
-  // const { users } = await createAdminClient();
-  // const user = await users.get(userId);
-  // const email = user.email;
+  const { users } = await createAdminClient();
+  const user = await users.get(userId);
+  const email = user.email;
 
   try {
     console.log("Sending email to user...");
-    console.log("userId", userId);
+    console.log("email", email);
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
+      from: EMAIL_USER,
+      to: email,
       subject,
       text,
     });
