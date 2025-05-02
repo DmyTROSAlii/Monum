@@ -219,7 +219,13 @@ const app = new Hono()
       );
       console.log("Task created:", task);
 
-      useNotificateEmail({userId: assigneeId, subject: "New task assigned", text: `You have a new task assigned to you: ${task.name}`});
+      const assigneeUser = await databases.getDocument(
+        DATABASES_ID,
+        MEMBERS_ID,
+        assigneeId
+      );
+
+      useNotificateEmail({userId: assigneeUser.userId, subject: "New task assigned", text: `You have a new task assigned to you: ${task.name}`});
 
       return c.json({ data: task });
     }
