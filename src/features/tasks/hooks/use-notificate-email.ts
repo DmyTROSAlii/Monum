@@ -4,7 +4,7 @@ import { createAdminClient } from "@/lib/appwrite";
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
+  host: "smtp.gmail.com",
   port: 587,
   secure: false,
   auth: {
@@ -19,18 +19,19 @@ interface EmailProps {
   text: string;
 }
 
-export const useNotificateEmail = async ({ userId, subject, text}: EmailProps) => {
+export const useNotificateEmail = async ({
+  userId,
+  subject,
+  text,
+}: EmailProps) => {
   const { users } = await createAdminClient();
 
   let user;
   try {
     user = await users.get(userId);
-  } catch (error: any) {
-    if (error.code === 404) {
-      console.error(`User with ID ${userId} not found.`);
-      return { error: "User not found" };
-    }
-    throw error;
+  } catch (error) {
+    console.error(`User with ID ${userId} not found.`);
+    return { error: "User not found" };
   }
 
   const email = user.email;
