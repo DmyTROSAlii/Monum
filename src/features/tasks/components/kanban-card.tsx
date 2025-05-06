@@ -7,6 +7,7 @@ import { Separator } from "@radix-ui/react-dropdown-menu";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { TaskDate } from "./task-date";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
+import { Badge } from "@/components/ui/badge";
 
 interface KanbanCardProps {
   task: Task;
@@ -39,6 +40,10 @@ export const KanbanCard = ({ task }: KanbanCardProps) => {
           fallbackClassName="text-[10px]"
         />
         <span className="text-xs font-medium">{task.project.name}</span>
+        <div className="size-1 rounded-full bg-neutral-300" />
+        <Badge variant={task.priority} className="text-[10px] dark:text-zinc-300 font-medium">
+          {task.priority}
+        </Badge>
       </div>
     </div>
   )
