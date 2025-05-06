@@ -16,7 +16,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 
-import { Task, TaskStatus } from "../types";
+import { Task, TaskPriority, TaskStatus } from "../types";
 import { createTaskSchema } from "../schemas";
 import { useUpdateTask } from "../api/use-update-task";
 
@@ -162,6 +162,45 @@ export const EditTaskForm = ({ onCancel, projectOpions, memberOpions, initialVal
                         </SelectItem>
                         <SelectItem value={TaskStatus.DONE}>
                           DONE
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="priority"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Priority
+                    </FormLabel>
+                    <Select
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select priority" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <FormMessage />
+                      <SelectContent>
+                        <SelectItem value={TaskPriority.LOWEST}>
+                          LOWEST
+                        </SelectItem>
+                        <SelectItem value={TaskPriority.LOW}>
+                          LOW
+                        </SelectItem>
+                        <SelectItem value={TaskPriority.MEDIUM}>
+                          MEDIUM
+                        </SelectItem>
+                        <SelectItem value={TaskPriority.HIGH}>
+                          HIGH
+                        </SelectItem>
+                        <SelectItem value={TaskPriority.HIGHEST}>
+                          HIGHEST
                         </SelectItem>
                       </SelectContent>
                     </Select>
