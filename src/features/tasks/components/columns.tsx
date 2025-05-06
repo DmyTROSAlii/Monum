@@ -1,13 +1,13 @@
 "use client";
 
-import { Task } from "../types";
+import { Task, TaskPriority } from "../types";
 import { TaskDate } from "./task-date";
 import { TaskActions } from "./task-actions";
 
 import { snakeCaseToTitleCase } from "@/lib/utils";
 
 import { ArrowUpDown, MoreVertical } from "lucide-react";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Row } from "@tanstack/react-table";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,16 @@ import { Button } from "@/components/ui/button";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 
+const priorityOrder: Record<TaskPriority, number> = Object.values(TaskPriority).reduce(
+  (acc, priorirt, index) => {
+    acc[priorirt as TaskPriority] = index;
+    return acc;
+  },
+  {} as Record<TaskPriority, number>
+);
+
+const prioritetSorting = (rowA: Row<Task>, rowB: Row<Task>) =>
+  priorityOrder[rowA.original.priority as TaskPriority] - priorityOrder[rowB.original.priority as TaskPriority];
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -66,21 +76,23 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: "priority",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Priority
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
+    sortingFn: prioritetSorting,
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Priority
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
     cell: ({ row }) => {
       const priority = row.original.priority;
-
-      return <Badge className="dark:text-zinc-800" variant={row.original.priority}>{snakeCaseToTitleCase(priority)}</Badge>
+      return (
+        <Badge className="dark:text-zinc-800" variant={priority}>
+          {snakeCaseToTitleCase(priority)}
+        </Badge>
+      );
     },
   },
   {
