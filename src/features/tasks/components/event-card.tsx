@@ -3,7 +3,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
-import { TaskPriority, TaskStatus } from "../types";
+import { TaskStatus } from "../types";
 
 import { TaskDetailsModal } from "./task-overview-modal";
 
@@ -18,7 +18,6 @@ interface EventCartProps {
   assignee: Member;
   project: Project;
   status: TaskStatus;
-  priority: TaskPriority;
   id: string;
 };
 
@@ -35,7 +34,6 @@ export const EventCard = ({
   assignee,
   project,
   status,
-  priority,
   id,
 }: EventCartProps) => {
   const workspaceId = useWorkspaceId();
