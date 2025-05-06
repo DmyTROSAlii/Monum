@@ -52,6 +52,11 @@ export const TaskOverview = ({
               {snakeCaseToTitleCase(task.status)}
             </Badge>
           </OverviewProperty>
+          <OverviewProperty label="Priority">
+            <Badge variant={task.priority} className="dark:text-zinc-800">
+              {snakeCaseToTitleCase(task.priority || "MEDIUM")}
+            </Badge>
+          </OverviewProperty>
         </div>
       </div>
     </div>
