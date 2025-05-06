@@ -82,6 +82,7 @@ export const DataCalendar = ({
     project: task.project,
     assignee: task.assignee,
     status: task.status,
+    priority: task.priority,
     id: task.$id,
   }));
 
@@ -116,6 +117,7 @@ export const DataCalendar = ({
             assignee={event.assignee}
             project={event.project}
             status={event.status}
+            priority={event.priority}
           />
         ),
         toolbar: () => (

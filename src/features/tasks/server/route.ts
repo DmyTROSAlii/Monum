@@ -17,8 +17,8 @@ import { cascadeDelete } from "@/lib/utils";
 import { createAdminClient } from "@/lib/appwrite";
 import { sessionMiddleware } from "@/lib/session-middleware";
 
-import { Comment, Task, TaskStatus } from "../types";
 import { createTaskComment, createTaskSchema } from "../schemas";
+import { Comment, Task, TaskPriority, TaskStatus } from "../types";
 import { useNotificateEmail } from "../hooks/use-notificate-email";
 
 const app = new Hono()
@@ -63,6 +63,7 @@ const app = new Hono()
         projectId: z.string().nullish(),
         assigneeId: z.string().nullish(),
         status: z.nativeEnum(TaskStatus).nullish(),
+        priority: z.nativeEnum(TaskPriority).nullish(),
         search: z.string().nullish(),
         dueDate: z.string().nullish(),
       })
@@ -72,7 +73,7 @@ const app = new Hono()
       const databases = c.get("databases");
       const user = c.get("user");
 
-      const { workspaceId, projectId, status, search, assigneeId, dueDate } =
+      const { workspaceId, projectId, status, priority, search, assigneeId, dueDate } =
         c.req.valid("query");
 
       const member = await getMember({
@@ -96,6 +97,10 @@ const app = new Hono()
 
       if (status) {
         query.push(Query.equal("status", status));
+      }
+
+      if (priority) {
+        query.push(Query.equal("priority", priority));
       }
 
       if (assigneeId) {
@@ -174,7 +179,7 @@ const app = new Hono()
     async (c) => {
       const user = c.get("user");
       const databases = c.get("databases");
-      const { name, status, workspaceId, projectId, dueDate, assigneeId } =
+      const { name, status, priority, workspaceId, projectId, dueDate, assigneeId } =
         c.req.valid("json");
 
       const member = await getMember({
@@ -210,6 +215,7 @@ const app = new Hono()
         {
           name,
           status,
+          priority,
           workspaceId,
           projectId,
           dueDate,
@@ -243,7 +249,7 @@ const app = new Hono()
     async (c) => {
       const user = c.get("user");
       const databases = c.get("databases");
-      const { name, status, description, projectId, dueDate, assigneeId } =
+      const { name, status, priority, description, projectId, dueDate, assigneeId } =
         c.req.valid("json");
 
       const { taskId } = c.req.param();
@@ -271,6 +277,7 @@ const app = new Hono()
         {
           name,
           status,
+          priority,
           projectId,
           dueDate,
           assigneeId,

@@ -30,6 +30,7 @@ interface TaskViewSwitcherProps {
 export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) => {
   const [{
     status,
+    priority,
     assigneeId,
     projectId,
     dueDate
@@ -52,6 +53,7 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) =
     projectId: paramProjectId || projectId,
     assigneeId,
     status,
+    priority,
     dueDate
   });
 

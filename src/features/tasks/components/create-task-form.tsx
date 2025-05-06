@@ -18,7 +18,7 @@ import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
-import { TaskStatus } from "../types";
+import { TaskPriority, TaskStatus } from "../types";
 import { createTaskSchema } from "../schemas";
 import { useCreateTask } from "../api/use-create-task";
 
@@ -41,6 +41,7 @@ export const CreateTaskForm = ({ onCancel, status, projectOpions, memberOpions }
       projectId: projectId,
       workspaceId,
       status: Object.values(TaskStatus).includes(status as TaskStatus) ? (status as TaskStatus) : undefined,
+      priority: TaskPriority.MEDIUM,
     },
   });
 
@@ -168,6 +169,45 @@ export const CreateTaskForm = ({ onCancel, status, projectOpions, memberOpions }
                         </SelectItem>
                         <SelectItem value={TaskStatus.DONE}>
                           DONE
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="priority"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Priority
+                    </FormLabel>
+                    <Select
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select priority" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <FormMessage />
+                      <SelectContent>
+                        <SelectItem value={TaskPriority.LOWEST}>
+                          LOWEST
+                        </SelectItem>
+                        <SelectItem value={TaskPriority.LOW}>
+                          LOW
+                        </SelectItem>
+                        <SelectItem value={TaskPriority.MEDIUM}>
+                          MEDIUM
+                        </SelectItem>
+                        <SelectItem value={TaskPriority.HIGH}>
+                          HIGH
+                        </SelectItem>
+                        <SelectItem value={TaskPriority.HIGHEST}>
+                          HIGHEST
                         </SelectItem>
                       </SelectContent>
                     </Select>

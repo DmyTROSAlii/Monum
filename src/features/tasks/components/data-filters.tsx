@@ -2,7 +2,7 @@ import { useGetMembers } from "@/features/members/api/use-get-members";
 import { useGetProjects } from "@/features/projects/api/use-get-projects";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
-import { TaskStatus } from "../types";
+import { TaskPriority, TaskStatus } from "../types";
 
 import { useTaskFilters } from "../hooks/use-task-filters";
 
@@ -35,6 +35,7 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
 
   const [{
     status,
+    priority,
     assigneeId,
     projectId,
     dueDate
@@ -42,6 +43,11 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
 
   const onStatusChange = (value: string) => {
     setFilters({ status: value === "all" ? null : value as TaskStatus });
+  };
+
+  const onPriorityChange = (value: string) => {
+    console.log("Selected priority:", value)
+    setFilters({ priority: value === "all" ? null : value as TaskPriority });
   };
 
   const onAssigneeChange = (value: string) => {
@@ -74,6 +80,29 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
           <SelectItem value={TaskStatus.IN_REVIEW}>IN REVIEW</SelectItem>
           <SelectItem value={TaskStatus.TODO}>TODO</SelectItem>
           <SelectItem value={TaskStatus.DONE}>DONE</SelectItem>
+        </SelectContent>
+      </Select>
+      <Select
+        defaultValue={priority ?? undefined}
+        onValueChange={(value) => {
+          console.log("Priority changed:", value);
+          onPriorityChange(value)
+        }}
+      >
+        <SelectTrigger className="w-full lg:w-auto h-8">
+          <div className="flex items-center pr-2">
+            <ListChecksIcon className="size-4 mr-2" />
+            <SelectValue placeholder="All Priority" />
+          </div>
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All priority</SelectItem>
+          <SelectSeparator />
+          <SelectItem value={TaskPriority.LOWEST}>LOWEST</SelectItem>
+          <SelectItem value={TaskPriority.LOW}>LOW</SelectItem>
+          <SelectItem value={TaskPriority.MEDIUM}>MEDIUM</SelectItem>
+          <SelectItem value={TaskPriority.HIGH}>HIGH</SelectItem>
+          <SelectItem value={TaskPriority.HIGHEST}>HIGHEST</SelectItem>
         </SelectContent>
       </Select>
       <Select

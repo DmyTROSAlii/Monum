@@ -8,9 +8,18 @@ export enum TaskStatus {
   DONE = "DONE",
 }
 
+export enum TaskPriority {
+  LOWEST = "LOWEST",
+  LOW = "LOW",
+  MEDIUM = "MEDIUM",
+  HIGH = "HIGH",
+  HIGHEST = "HIGHEST",
+}
+
 export type Task = Models.Document & {
   name: string;
   status: TaskStatus;
+  priority: TaskPriority;
   workspaceId: string;
   assigneeId: string;
   projectId: string;
@@ -26,4 +35,3 @@ export type Comment = Models.Document & {
   userName: string;
   comment: string;
 };
-

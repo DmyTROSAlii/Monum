@@ -64,6 +64,11 @@ export const TaskDetailsModal = ({
             {snakeCaseToTitleCase(data?.status || "BACKLOG")}
           </Badge>
         </OverviewProperty>
+        {/* <OverviewProperty label="Priority">
+          <Badge variant={data?.priority} className="dark:text-zinc-800">
+            {snakeCaseToTitleCase(data?.priority || "MEDIUM")}
+          </Badge>
+        </OverviewProperty> */}
         {(data?.description ?
           <OverviewProperty label="Description">
             <p className="text-sm font-medium">{data?.description || ""}</p>
