@@ -3,13 +3,7 @@ import { redirect } from "next/navigation";
 import { getCurrent } from "@/features/auth/queries";
 import { SignUpCard } from "@/features/auth/components/sign-up-card";
 
-interface SignUpPageProps {
-    searchParams: {
-      redirect?: string;
-    };
-}
-
-const SignUpPage = async ({ searchParams }: SignUpPageProps) => {
+const SignUpPage = async ({ searchParams }: { searchParams: { redirect?: string } }) => {
     const user = await getCurrent();
 
     const redirectString = searchParams.redirect ?? '/';
