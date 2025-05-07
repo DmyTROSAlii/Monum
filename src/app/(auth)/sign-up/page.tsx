@@ -1,20 +1,22 @@
 import { redirect } from "next/navigation";
 
+// Removed invalid import for PageProps
+
 import { getCurrent } from "@/features/auth/queries";
 import { SignUpCard } from "@/features/auth/components/sign-up-card";
+import { PageProps } from "../../../../.next/types/app/(dashboard)/workspaces/[workspaceId]/tasks/[taskId]/page";
 
-const SignUpPage = async ({
+export default async function SignUpPage({
     searchParams,
-}: {
-    searchParams?: { redirect?: string };
-}) => {
+  }: {
+    searchParams?: PageProps["searchParams"];
+  }) {
     const user = await getCurrent();
 
-    const redirectString = searchParams?.redirect ?? '/';
+    const resolvedSearchParams = await searchParams;
+    const redirectUrl = resolvedSearchParams?.redirect || "/";
 
-    if (user) redirect(redirectString);
+    if (user) redirect(redirectUrl);
 
-    return <SignUpCard />
-};
-
-export default SignUpPage;
+    return <SignUpCard />;
+}
