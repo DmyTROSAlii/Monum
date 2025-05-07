@@ -14,7 +14,7 @@ interface TaskIdPageProps {
 const TaskIdPage = async ({ params }: TaskIdPageProps) => {
   const user = await getCurrent();
 
-  if (!user) redirect(`/sign-up?redirect=/dashboard/workspaces/${params.workspaceId}/tasks/${params.taskId}`);
+  if (!user) redirect(`/sign-up?redirect=/workspaces/${params.workspaceId}/tasks/${params.taskId}`);
 
   return <TaskIdClient />
 }
