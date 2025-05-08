@@ -9,7 +9,7 @@ const TaskIdPage = async ({ params }: { params: Promise<{ workspaceId: string; t
 
   if (!user) {
     const { workspaceId, taskId } = await params;
-    redirect(`/sign-up?redirectUrl=/workspaces/${workspaceId}/tasks/${taskId}`);
+    redirect(`/sign-in?redirectUrl=/workspaces/${workspaceId}/tasks/${taskId}`);
   }
 
   return <TaskIdClient />
