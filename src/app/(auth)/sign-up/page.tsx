@@ -1,18 +1,18 @@
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { getCurrent } from "@/features/auth/queries";
 import { SignUpCard } from "@/features/auth/components/sign-up-card";
 
-export default async function SignUpPage() {
+const TaskIdPage = async ({ searchParams }: { searchParams: Promise<{ redirectUrl: string | undefined; }> }) => {
   const user = await getCurrent();
 
   if (user) {
-    const cookieStore = cookies();
-    const redirectPath = (await cookieStore).get("redirectAfterAuth")?.value || "/";
+    const { redirectUrl } = await searchParams;
 
-    redirect(redirectPath);
+    redirect(redirectUrl || "/");
   }
 
   return <SignUpCard />;
 }
+
+export default TaskIdPage;
