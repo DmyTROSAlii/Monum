@@ -14,6 +14,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Monum",
+  description: "MONUM is a convenient system for project management and teamwork. Create tasks, workspaces, comment, manage statuses - simply and quickly from any device.",
 };
 
 export default function RootLayout({
