@@ -41,7 +41,7 @@ export const Navigation = () => {
 
   return (
     <ul className="flex flex-col">
-      {routes.map((item) => {
+      <li>{routes.map((item) => {
         const fullHref = `/workspaces/${workspaceId}${item.href}`;
         const isActive = pathname === fullHref;
         const Icon = isActive ? item.activeIcon : item.icon;
@@ -52,12 +52,12 @@ export const Navigation = () => {
               "flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-neutral-500",
               isActive && "bg-white dark:bg-zinc-700 shadow-sm hover:opacity-100 text-primary border-l-2 border-l-primary",
             )}>
-              <Icon className="size-5 text-neutral-500" />
+              <Icon className="size-5 text-neutral-500" aria-label={item.label + " Page"} />
               {item.label}
             </div>
           </Link>
         );
-      })}
+      })}</li>
     </ul>
   );
 };

@@ -20,7 +20,7 @@ export const Projects = () => {
     <div className="flex flex-col gap-y-2">
       <div className="flex items-center justify-between">
         <p className="text-xs uppercase text-neutral-500">Projects</p>
-        <RiAddCircleFill onClick={open} className="size-5 text-neutral-500 cursor-pointer hover:opacity-75 transition" title="Create New Project" />
+        <RiAddCircleFill onClick={open} className="size-5 text-neutral-500 cursor-pointer hover:opacity-75 transition" aria-label="Create New Project" />
       </div>
       {data?.documents.map((project) => {
         const href = `/workspaces/${workspaceId}/projects/${project.$id}`;
