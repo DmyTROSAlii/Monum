@@ -35,18 +35,20 @@ Monum is a project and task management system built with [Next.js](https://nextj
 
 ## Examples
 
-- **Authentication:**
-  ![Release slider](https://photos.app.goo.gl/tVX11CxFMQFiyEXM6)
+- **Authentication(Light Theme):**
+  ![Authentication Light](./preview/authentification.png)
+- **Authentication(Dark Theme):**
+  ![Authentication Dark](./preview/authentification_2.png)
 - **Main Page:**
-  ![Top anime](./img/preview/list-section.png)
+  ![Main Page:](./preview/main-page.png)
 - **Table View:**
-  ![Contact form](./img/preview/contact-section.png)
+  ![Table View](./preview/table-view.png)
 - **Kanban View:**
-  ![Contact form](./img/preview/contact-section.png)
+  ![Kanban View](./preview/kanban-view.png)
 - **Calendar View:**
-  ![Contact form](./img/preview/contact-section.png)
+  ![Calendar View](./preview/calendar-view.png)
 - **Task View:**
-  ![Contact form](./img/preview/contact-section.png)
+  ![Task View](./preview/task-view.png)
 
 ## Project Structure
 
