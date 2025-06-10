@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Monum
+
+Monum is a project and task management system built with [Next.js](https://nextjs.org) using modern technologies for team collaboration.
+
+## Table of Contents
+
+- [Main Features](#main-features)
+- [Technologies](#technologies)
+- [Examples](#examples)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Environment Setup](#environment-setup)
+- [Useful Scripts](#useful-scripts)
+- [Learn More](#learn-more)
+
+## Main Features
+
+- Manage workspaces, projects, and tasks
+- Assign responsible users and set priorities
+- Task comments and email notifications
+- Project analytics (completed, overdue, active tasks)
+- Member avatars and project image uploads
+- Responsive interface with dark mode
+
+## Technologies
+
+- **Next.js** (App Router)
+- **React** & **TypeScript**
+- **Appwrite** (database, users, files)
+- **React Query** (data caching and synchronization)
+- **Tailwind CSS** (styling)
+- **Zod** (form validation)
+- **Nodemailer** (email notifications)
+- **Sonner** (toast notifications)
+
+## Examples
+
+- **Authentication:**
+  ![Release slider](https://photos.app.goo.gl/tVX11CxFMQFiyEXM6)
+- **Main Page:**
+  ![Top anime](./img/preview/list-section.png)
+- **Table View:**
+  ![Contact form](./img/preview/contact-section.png)
+- **Kanban View:**
+  ![Contact form](./img/preview/contact-section.png)
+- **Calendar View:**
+  ![Contact form](./img/preview/contact-section.png)
+- **Task View:**
+  ![Contact form](./img/preview/contact-section.png)
+
+## Project Structure
+
+```
+src/
+  app/                # Pages and layout
+  components/         # UI components
+  features/           # Features: auth, members, projects, tasks, workspaces
+  hooks/              # Custom hooks
+  lib/                # Utilities, integrations (appwrite, email)
+  config.ts           # Appwrite and other configs
+public/               # Static files
+```
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+2. Create a `.env.local` file and add the required environment variables (Appwrite, email, etc).
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) with your browser.
+
+## Environment Setup
+
+You need to configure Appwrite (endpoint, projectId, API key) and email (SMTP for Nodemailer). Example `.env.local`:
+
+```
+NEXT_PUBLIC_APPWRITE_ENDPOINT=...
+NEXT_PUBLIC_APPWRITE_PROJECT=...
+NEXT_APPWRITE_KEY=...
+EMAIL_USER=...
+EMAIL_PASS=...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Useful Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run build` — build the project
+- `npm run lint` — lint the code
+- `npm run test` — run tests (if configured)
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Appwrite Documentation](https://appwrite.io/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Monum** — a modern tool for team collaboration and effective project management.
