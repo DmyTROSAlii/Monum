@@ -107,7 +107,7 @@ EMAIL_PASS=...
 
 - `npm run build` — build the project
 - `npm run lint` — lint the code
-- `npm run test` — run tests (if configured)
+- `npm run test` — run tests 
 
 ## Learn More
 
